@@ -39,7 +39,7 @@ const Signin = () => {
 
   const performRedirect = () => {
       if(isAuthenticated()){
-        return <Redirect to="/" />
+        return <Redirect to="/dashboard" />
       }
   }
 
