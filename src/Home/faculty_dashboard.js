@@ -3,26 +3,23 @@ import Nav from './nav'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 
-const dashboard = () => {
+const FacultyDashboard = () => {
     
-    const { user: {name,email,roll_no,room_no,year,dept,address}} = isAuthenticated()
+    const { user: {name,email,dept}} = isAuthenticated()
 
     const student = () => {
         return (
             <div className="card">
-                <h4 className="card-header bg-dark text-white">Student</h4>
+                <h4 className="card-header bg-dark text-white">Faculty</h4>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <Link to="/student/gatepass" className="nav-link text-success">Apply Home Pass</Link>
+                        <Link to="/faculty/studentInfo" className="nav-link text-success">Check Student Info</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/student/outpass" className="nav-link text-success">Apply Out Pass</Link>
+                        <Link to="/faculty/viewpass" className="nav-link text-success">View Pass</Link>
                     </li>
                     <li className="list-group-item">
-                    <Link to="/student/viewpass" className="nav-link text-success">View Pass</Link>
-                    </li>
-                    <li className="list-group-item">
-                    <Link to="/student/qrcode" className="nav-link text-success">QR Code</Link>
+                    <Link to="/faculty/passlog" className="nav-link text-success">Log</Link>
                     </li>
                 </ul>
             </div>
@@ -32,7 +29,7 @@ const dashboard = () => {
     const info = () => {
         return(
         <div className="card mb-4">
-                <h4 className="card-header">Student Information</h4>
+                <h4 className="card-header">Faculty Information</h4>
                 <ul className="list-group">
                     <li className="list-group-item">
                         <span className="badge badge-success mr-2">Name:</span>{name}
@@ -41,22 +38,10 @@ const dashboard = () => {
                         <span className="badge badge-success mr-2">Email:</span>{email}
                     </li>
                     <li className="list-group-item">
-                        <span className="badge badge-success mr-2">Roll No:</span>{roll_no}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-success mr-2">Room No:</span>{room_no}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-success mr-2">Year:</span>{year}
-                    </li>
-                    <li className="list-group-item">
                         <span className="badge badge-success mr-2">Dept:</span>{dept}
                     </li>
                     <li className="list-group-item">
-                        <span className="badge badge-success mr-2">Address:</span>{address}
-                    </li>                    
-                    <li className="list-group-item">
-                        <span className="badge badge-danger">Student Area</span>
+                        <span className="badge badge-danger">Faculty Area</span>
                     </li>
                 </ul>
             </div>
@@ -66,7 +51,7 @@ const dashboard = () => {
         <div>
         <Nav/>
         <div className="jumbotron-fluid bg-success">
-            <h1 className="display-3 text-center p-4">Student Dashboard</h1>
+            <h1 className="display-3 text-center p-4">Faculty Dashboard</h1>
             </div>
         <div className="container p-2">
             <div className="row m-0">
@@ -83,4 +68,4 @@ const dashboard = () => {
 }
 
 
-export default dashboard
+export default FacultyDashboard

@@ -38,10 +38,16 @@ const Signin = () => {
   }
 
   const performRedirect = () => {
-      if(isAuthenticated()){
-        return <Redirect to="/dashboard" />
+    if(isAuthenticated()){
+    if(didRedirect) {
+      if(user && user.role === 1){
+        return <Redirect to="/faculty/dashboard"/>
+      } else{
+        return <Redirect to="/dashboard"/>
       }
+    }
   }
+}
 
   const loadingMessage = () => {
     return(
@@ -55,12 +61,8 @@ const Signin = () => {
 
   const errorMessage = () => {
     return ( 
-      <div className="row">
-      <div className="col-md-5 offset-sm-3 text-left">
-      <div className="alert alert-danger" style={{display: error ? "" : "none"}}>
+      <div className="alert alert-danger text-center" style={{display: error ? "" : "none"}}>
       {error}
-      </div>
-      </div>
       </div>
     )
   }

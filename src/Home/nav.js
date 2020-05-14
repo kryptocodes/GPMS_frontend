@@ -14,7 +14,7 @@ const currentTab = (history, path) => {
 const Nav = ({history}) => (
     <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <p className="text-white">GPMS</p>
+        <span className="text-white">GPMS</span>
         <button 
             className="navbar-toggler collapsed" 
             type="button" 

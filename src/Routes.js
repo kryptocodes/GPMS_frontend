@@ -2,6 +2,9 @@ import React from 'react'
 import {BrowserRouter,Switch,Route} from "react-router-dom"
 import Home from './Home/home'
 import Dashboard from './Home/dashboard'
+import FacultyDashboard from './Home/faculty_dashboard'
+import StudentRoute from './auth/studentDashboard'
+import FacultyRoute from './auth/facultyDashboard'
 
 export default function Routes() {
     return (
@@ -9,7 +12,8 @@ export default function Routes() {
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact component={Home}/>
-                    <Route path="/dashboard" exact component={Dashboard}/>
+                    <FacultyRoute path="/faculty/dashboard" exact component={FacultyDashboard}/>
+                    <StudentRoute path="/dashboard" exact component={Dashboard}/>
                 </Switch>
             </BrowserRouter>
         </div>
