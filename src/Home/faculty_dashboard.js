@@ -29,7 +29,15 @@ const FacultyDashboard = () => {
     const info = () => {
         return(
         <div className="card mb-4">
-                <h4 className="card-header">Faculty Information</h4>
+                <div className="d-flex bd-highlight">
+                <h4 className="card-header p-2 flex-grow-1 bd-highlight">Faculty Information</h4>
+                <Link 
+                className="btn btn-success mx-auto bd-highligh"
+                to="/faculty/updatepassword"
+                >
+                     Change Password
+                 </Link>
+                 </div>
                 <ul className="list-group">
                     <li className="list-group-item">
                         <span className="badge badge-success mr-2">Name:</span>{name}

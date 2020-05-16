@@ -1,21 +1,18 @@
 import React,{useState} from 'react'
 import Base from '../Home/base'
-import { Link } from 'react-router-dom'
+import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
-import { UpdatePass } from './update'
 
-
-const UpdatePassword = () => {
+const ApplyPass = () => {
     
-    const [password, setPassword] = useState("")
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
 
-    const {user, token} = isAuthenticated()
+    const {user: {role}, token} = isAuthenticated()
 
     const goBack = (
     ) => {
-        if(user.role===1){
+        if(role===1){
         return(
         <div className="mt-5">
             <Link className="btn btn-xl btn-warning mb-3" to="/faculty/dashboard">Back</Link>
@@ -27,37 +24,15 @@ const UpdatePassword = () => {
         )
     }
 
-    const handleChange = event => {
-        setError("");
-        setPassword(event.target.value)
-    }
-
-    const onSubmit = (event) => {
-        event.preventDefault()
-        setError("")
-        setSuccess(false)
-        //backend request
-        UpdatePass(user._id,token,{password})
-        .then(data => {
-            if(data.error){
-                setError(true)
-            } else {
-                setError("")
-                setSuccess(true)
-                setPassword("")
-            }
-        })
-    }
-
     const successMessage = () => {
         if(success) {
-            return <h4 className="alert alert-success text-center">Password updated successfully</h4>
+            return <h4 className="alert alert-success text-center">Applied successfully</h4>
         }
     }
 
     const warningMessage = () => {
         if(error) {
-            return <h4 className="alert alert-danger text-center">Failed to update successfully</h4>
+            return <h4 className="alert alert-danger text-center">Failed to apply successfully</h4>
         }
     }
 
@@ -65,23 +40,43 @@ const UpdatePassword = () => {
         return(
             <form>
             <div className="form-group">
-            <p className="lead">Enter new password</p>
-            <input type="password"
+            <p className="lead">Date</p>
+            <div className="row m-0">
+            <div className="col-md-3">
+            <p className="lead">From</p>
+            <input type="text"
                 className="form-control my-3"
-                onChange={handleChange}
-                value={password}
                 autoFocus
                 required
-                placeholder="enter"
+                placeholder="DD/MM/YYYY"
                 />
             </div>
-            <button onClick={onSubmit} className="btn btn-outline-success">Update password</button>
+            <div className="col-md-3">
+                <p className="lead">To</p>
+                <input type="text"
+                    className="form-control my-3"
+                    autoFocus
+                    required
+                    placeholder="DD/MM/YYYY"
+                />
+            </div>
+                </div>
+                <p className="lead">Reason</p>
+                <input type="text"
+                    className="form-control my-3"
+                    autoFocus
+                    required
+                    placeholder="Please Leave me I wanna go home"
+                />
+            </div>
+            
+            <button className="btn btn-outline-success">Apply</button>
             </form>
         )
     }
 
     return (
-        <Base title="Update Password">
+        <Base title="Home Pass">
         <div className="container">
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
@@ -102,4 +97,4 @@ const UpdatePassword = () => {
 
 
 
-export default UpdatePassword
+export default ApplyPass

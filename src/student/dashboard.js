@@ -5,7 +5,7 @@ import Base from '../Home/base'
 
 const dashboard = () => {
     
-    const { user: {name,email,roll_no,room_no,year,dept,address}} = isAuthenticated()
+    const { user: {name,email,roll_no,room_no,year,mobile_no,dept,address}} = isAuthenticated()
 
     const student = () => {
         return (
@@ -40,7 +40,12 @@ const dashboard = () => {
                     >
                     Change Password
                 </Link>
-                <button className="btn btn-success bd-highligh">Edit</button>
+                <Link 
+                className="btn btn-success mx-auto bd-highligh"
+                to="/student/updateprofile"
+                >
+                Edit
+            </Link>
                 </div>
                 <ul className="list-group">
                     <li className="list-group-item">
@@ -60,6 +65,9 @@ const dashboard = () => {
                     </li>
                     <li className="list-group-item">
                         <span className="badge badge-success mr-2">Dept:</span>{dept}
+                    </li>
+                    <li className="list-group-item">
+                        <span className="badge badge-success mr-2">Mobile No:</span>{mobile_no}
                     </li>
                     <li className="list-group-item">
                         <span className="badge badge-success mr-2">Address:</span>{address}
