@@ -1,7 +1,7 @@
 import React from 'react'
-import Nav from './nav'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
+import Base from '../Home/base'
 
 const dashboard = () => {
     
@@ -19,7 +19,7 @@ const dashboard = () => {
                         <Link to="/student/outpass" className="nav-link text-success">Apply Out Pass</Link>
                     </li>
                     <li className="list-group-item">
-                    <Link to="/student/viewpass" className="nav-link text-success">View Pass</Link>
+                    <Link to="/student/viewpass" className="nav-link text-success">View Pass Status</Link>
                     </li>
                     <li className="list-group-item">
                     <Link to="/student/qrcode" className="nav-link text-success">QR Code</Link>
@@ -32,7 +32,16 @@ const dashboard = () => {
     const info = () => {
         return(
         <div className="card mb-4">
-                <h4 className="card-header">Student Information</h4>
+                <div className="d-flex bd-highlight">
+                <h4 className="card-header p-2 flex-grow-1 bd-highlight">Student Information</h4>
+                <Link 
+                    className="btn btn-success mx-auto bd-highligh"
+                    to="/student/updatepassword"
+                    >
+                    Change Password
+                </Link>
+                <button className="btn btn-success bd-highligh">Edit</button>
+                </div>
                 <ul className="list-group">
                     <li className="list-group-item">
                         <span className="badge badge-success mr-2">Name:</span>{name}
@@ -55,30 +64,23 @@ const dashboard = () => {
                     <li className="list-group-item">
                         <span className="badge badge-success mr-2">Address:</span>{address}
                     </li>                    
-                    <li className="list-group-item">
-                        <span className="badge badge-danger">Student Area</span>
-                    </li>
                 </ul>
             </div>
     )}
 
     return (
-        <div>
-        <Nav/>
-        <div className="jumbotron-fluid bg-success">
-            <h1 className="display-3 text-center p-4">Student Dashboard</h1>
-            </div>
+        <Base title="Student Dashboard">
         <div className="container p-2">
             <div className="row m-0">
-                <div className="col-md-3">
+                <div className="col-md-3 p-2 mx-auto">
                 {student()}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-9 p-2 mx-auto">
                 {info()}
                 </div>
             </div>
         </div>
-        </div>
+        </Base>
     )
 }
 

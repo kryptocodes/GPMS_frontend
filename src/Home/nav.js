@@ -13,21 +13,8 @@ const currentTab = (history, path) => {
 
 const Nav = ({history}) => (
     <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <span className="text-white">GPMS</span>
-        <button 
-            className="navbar-toggler collapsed" 
-            type="button" 
-            data-toggle="collapse" 
-            data-target="#navbarNav" 
-            aria-controls="navbarNav" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation"
-        >
-        <span className="close text-white"><i className="fa fa-times"></i></span>
-        <span className="open text-white"><i className="fa fa-bars"></i></span>
-      </button>
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <nav className="navbar navbar-light bg-dark">
+        <span className="text-white display-4">GPMS</span>
         <ul className="nav navbar-nav">
             {isAuthenticated() && (
                 <li className="nav-item">
@@ -45,7 +32,6 @@ const Nav = ({history}) => (
             )}
              
         </ul>
-        </div>  
     </nav>
     </div>
 )
