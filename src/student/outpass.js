@@ -3,7 +3,7 @@ import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
 
-const ApplyPass = () => {
+const OutPass = () => {
     
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -54,33 +54,12 @@ const ApplyPass = () => {
                 />
             </div>
             </div>
-            <p className="lead">Date</p>
-            <div className="row m-0">
-            <div className="col-md-3">
-            <p className="lead">From</p>
-            <input type="text"
-                className="form-control my-3"
-                autoFocus
-                required
-                placeholder="DD/MM/YYYY"
-                />
-            </div>
-            <div className="col-md-3">
-                <p className="lead">To</p>
+               <p className="lead">Reason</p>
                 <input type="text"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder="DD/MM/YYYY"
-                />
-            </div>
-                </div>
-                <p className="lead">Reason</p>
-                <input type="text"
-                    className="form-control my-3"
-                    autoFocus
-                    required
-                    placeholder="Please Leave me I wanna go home"
+                    placeholder="Please I wanna go out"
                 />
             </div>
             
@@ -90,7 +69,7 @@ const ApplyPass = () => {
     }
 
     return (
-        <Base title="Home Pass">
+        <Base title="Out Pass">
         <div className="container">
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
@@ -111,4 +90,4 @@ const ApplyPass = () => {
 
 
 
-export default ApplyPass
+export default OutPass

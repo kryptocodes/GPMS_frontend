@@ -8,6 +8,7 @@ import FacultyRoute from './auth/facultyDashboard'
 import UpdatePassword from './auth/updatePassword'
 import UpdateProfile from './auth/updateProfile'
 import ApplyPass from './student/applypass'
+import OutPass from './student/outpass'
 
 export default function Routes() {
     return (
@@ -21,6 +22,7 @@ export default function Routes() {
                     <StudentRoute path="/student/updatepassword" exact component={UpdatePassword}/>
                     <StudentRoute path="/student/updateprofile" exact component={UpdateProfile}/>
                     <StudentRoute path="/student/gatepass" exact component={ApplyPass}/>
+                    <StudentRoute path="/student/outpass" exact component={OutPass}/>
                 </Switch>
             </BrowserRouter>
         </div>
