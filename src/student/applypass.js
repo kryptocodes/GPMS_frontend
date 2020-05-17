@@ -37,7 +37,7 @@ const ApplyPass = () => {
             <div className="row m-0">
             <div className="col-md-3">
             <p className="lead">Departure time</p>
-            <input type="text"
+            <input type="time"
                 className="form-control my-3"
                 autoFocus
                 required
@@ -46,7 +46,7 @@ const ApplyPass = () => {
             </div>
             <div className="col-md-3">
                 <p className="lead">Arrival Time</p>
-                <input type="text"
+                <input type="time"
                     className="form-control my-3"
                     autoFocus
                     required
@@ -56,22 +56,20 @@ const ApplyPass = () => {
             </div>
             <p className="lead">Date</p>
             <div className="row m-0">
-            <div className="col-md-3">
+            <div className="col-md-4">
             <p className="lead">From</p>
-            <input type="text"
+            <input type="date"
                 className="form-control my-3"
                 autoFocus
                 required
-                placeholder="DD/MM/YYYY"
                 />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
                 <p className="lead">To</p>
-                <input type="text"
+                <input type="date"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder="DD/MM/YYYY"
                 />
             </div>
                 </div>

@@ -106,15 +106,14 @@ const Signin = () => {
 
   return (
       <div> 
-      <div className="jumbotron bg-success">
-      <h1 className="display-3 text-center text-white">Signin</h1>
+      <div className="jumbotron-fluid bg-success">
+      <h1 className="display-3 text-white text-center p-4">Signin</h1>
       </div>
       <div className="container justify-content-center">
       {loadingMessage()}
       {errorMessage()}
       {signInForm()}
       {performRedirect()}
-        <p className="text-center">{JSON.stringify(values)}</p>
       </div>
       </div>
   )

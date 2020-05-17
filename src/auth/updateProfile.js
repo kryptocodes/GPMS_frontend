@@ -45,14 +45,14 @@ const UpdateProfile = () => {
                 className="form-control my-3"
                 autoFocus
                 disabled
-                placeholder={email}
+                defaultValue={email}
                 />
                 <p className="lead">Name</p>
                 <input type="text"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder={name}
+                    defaultValue={name}
                 />
                 <p className="lead">roll_no</p>
                 <input type="text"
@@ -60,42 +60,42 @@ const UpdateProfile = () => {
                     autoFocus
                     required
                     disabled
-                    placeholder={roll_no}
+                    defaultValue={roll_no}
                 />
                 <p className="lead">Room No</p>
                 <input type="text"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder={room_no}
+                    defaultValue={room_no}
                 />
                 <p className="lead">year</p>
                 <input type="text"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder={year}
+                    defaultValue={year}
                 />
                 <p className="lead">Dept</p>
                 <input type="text"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder={dept}
+                    defaultValue={dept}
                 />
                 <p className="lead">Mobile No</p>
                 <input type="text"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder={mobile_no}
+                    defaultValue={mobile_no}
                 />
                 <p className="lead">address</p>
                 <input type="text"
                     className="form-control my-3"
                     autoFocus
                     required
-                    placeholder={address}
+                    defaultValue={address}
                 />
             </div>
             

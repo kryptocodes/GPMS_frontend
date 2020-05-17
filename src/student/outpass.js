@@ -37,7 +37,7 @@ const OutPass = () => {
             <div className="row m-0">
             <div className="col-md-3">
             <p className="lead">Departure time</p>
-            <input type="text"
+            <input type="Time"
                 className="form-control my-3"
                 autoFocus
                 required
@@ -46,7 +46,7 @@ const OutPass = () => {
             </div>
             <div className="col-md-3">
                 <p className="lead">Arrival Time</p>
-                <input type="text"
+                <input type="Time"
                     className="form-control my-3"
                     autoFocus
                     required
