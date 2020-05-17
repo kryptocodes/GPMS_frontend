@@ -13,8 +13,7 @@ npm start
 ### Screenshots
 
 ![img](img/gpms.png)
-![img1](img/gpms_2.png)
-![img2](img/gpms_3.png)
+
 
 ### Contributing
 
