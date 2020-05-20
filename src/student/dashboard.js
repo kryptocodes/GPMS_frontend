@@ -1,11 +1,43 @@
-import React from 'react'
+import React,{ useState,useEffect } from 'react'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 import Base from '../Home/base'
+import { getUser } from '../auth/update'
 
-const dashboard = () => {
+
+const Dashboard = () => {
+
+    const [values,setValues]=useState({
+        email:"",
+        name:"",
+        roll_no:"",
+        room_no:"",
+        dept:"",
+        year:"",
+        mobile_no:"",
+        address:""
+    })
+
+    const {email,name,roll_no,room_no,dept,year,mobile_no,address} = values;
     
-    const { user: {name,email,roll_no,room_no,year,mobile_no,dept,address}} = isAuthenticated()
+    const {user,token} = isAuthenticated()
+
+    const preload = () => {
+        getUser(user._id,token)
+        .then(data => {
+            const {email,roll_no,name,room_no,dept,year,mobile_no,address} = data;
+            if(data.error){
+                setValues({...values,error:data.error})
+            } else{
+                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address})
+            }
+        })
+    }
+
+    useEffect(() => {
+        preload();
+    },[])
+   
 
     const student = () => {
         return (
@@ -93,4 +125,4 @@ const dashboard = () => {
 }
 
 
-export default dashboard
+export default Dashboard

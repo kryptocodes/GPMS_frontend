@@ -1,40 +1,87 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
+import { UpdateInfo, getUser } from '../auth/update'
 
 const UpdateProfile = () => {
     
-    const [error, setError] = useState(false)
-    const [success, setSuccess] = useState(false)
+    const [values , setValues] = useState({
+        email:"",
+        roll_no:"",
+        name:"",
+        room_no:"",
+        dept:"",
+        year:"",
+        mobile_no:"",
+        address:"",
+        error: "",
+        success: false
+    })
 
-    const {user: {name,email,roll_no,room_no,year,dept,mobile_no,address,role}, token} = isAuthenticated()
+    const {email,roll_no,name,room_no,dept,year,mobile_no,address} = values
+
+    const {user, token} = isAuthenticated()
 
     const goBack = (
     ) => {
-        if(role===1){
-        return(
-        <div className="mt-5">
-            <Link className="btn btn-xl btn-warning mb-3" to="/faculty/dashboard">Back</Link>
-        </div>
-        )} return (
+        return (
             <div className="mt-5">
             <Link className="btn btn-xl btn-warning mb-3" to="/dashboard">Back</Link>
             </div>
         )
     }
 
-    const successMessage = () => {
-        if(success) {
-            return <h4 className="alert alert-success text-center">Password updated successfully</h4>
-        }
+    const preload = () => {
+        getUser(user._id,token)
+        .then(data => {
+            const {email,roll_no,name,room_no,dept,year,mobile_no,address} = data;
+            if(data.error){
+                setValues({...values,error:data.error})
+            } else{
+                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address})
+            }
+        })
     }
 
-    const warningMessage = () => {
-        if(error) {
-            return <h4 className="alert alert-danger text-center">Failed to update successfully</h4>
-        }
+    useEffect(() => {
+        preload()
+    }, [])
+
+    const handleChange = name => event => {
+        setValues({ ...values, [name]: event.target.value });
+      }
+
+    const onSubmit = (event) => {
+        event.preventDefault()
+        //backend request
+        setValues({...values,error:"",success:false})
+        UpdateInfo(user._id,token,values)
+        .then(data => {
+            if(data.error){
+                setValues({...values,error:data.error})
+            } else {
+                setValues({
+                    ...values,
+                    success:true
+                })
+            }
+        })
     }
+
+    const successMessage = () => (
+        <div className="alert alert-success mt-3"
+        style={{display:values.success ? "" : "none"}}>
+       <h4>Profile updated successfully </h4>  
+      </div>
+    )
+
+    const warningMessage = () => (
+        <div className="alert alert-danger mt-3"
+          style={{display:values.error?"": "none"}}>
+         <h4>failed to update profile </h4>  
+        </div>
+    )
 
     const updateForm = () => {
         return(
@@ -43,63 +90,61 @@ const UpdateProfile = () => {
             <p className="lead">Email Id</p>
             <input type="text"
                 className="form-control my-3"
-                autoFocus
                 disabled
                 defaultValue={email}
                 />
                 <p className="lead">Name</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
+                    onChange={handleChange("name")}
                     required
                     defaultValue={name}
                 />
                 <p className="lead">roll_no</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
-                    required
+                    onChange={handleChange("roll_no")}
                     disabled
                     defaultValue={roll_no}
                 />
                 <p className="lead">Room No</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
+                    onChange={handleChange("room_no")}
                     required
                     defaultValue={room_no}
                 />
                 <p className="lead">year</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
+                    onChange={handleChange("year")}
                     required
                     defaultValue={year}
                 />
                 <p className="lead">Dept</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
+                    onChange={handleChange("dept")}
                     required
                     defaultValue={dept}
                 />
                 <p className="lead">Mobile No</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
+                    onChange={handleChange("mobile_no")}
                     required
                     defaultValue={mobile_no}
                 />
                 <p className="lead">address</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
+                    onChange={handleChange("address")}
                     required
                     defaultValue={address}
                 />
             </div>
             
-            <button className="btn btn-outline-success">Update profile</button>
+            <button onClick={onSubmit} className="btn btn-outline-success">Update profile</button>
             </form>
         )
     }
@@ -109,9 +154,9 @@ const UpdateProfile = () => {
         <div className="container">
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
+            {updateForm()}
             {successMessage()}
             {warningMessage()}
-            {updateForm()}
             {goBack()}
         </div>
         </div>

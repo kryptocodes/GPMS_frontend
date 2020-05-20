@@ -6,7 +6,7 @@ import FacultyDashboard from './Home/faculty_dashboard'
 import StudentRoute from './auth/studentDashboard'
 import FacultyRoute from './auth/facultyDashboard'
 import UpdatePassword from './auth/updatePassword'
-import UpdateProfile from './auth/updateProfile'
+import UpdateProfile from './student/updateProfile'
 import ApplyPass from './student/applypass'
 import OutPass from './student/outpass'
 

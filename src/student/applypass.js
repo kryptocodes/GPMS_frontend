@@ -39,7 +39,6 @@ const ApplyPass = () => {
             <p className="lead">Departure time</p>
             <input type="time"
                 className="form-control my-3"
-                autoFocus
                 required
                 placeholder="hh:mm"
                 />
@@ -48,7 +47,6 @@ const ApplyPass = () => {
                 <p className="lead">Arrival Time</p>
                 <input type="time"
                     className="form-control my-3"
-                    autoFocus
                     required
                     placeholder="hh:mm"
                 />
@@ -60,7 +58,6 @@ const ApplyPass = () => {
             <p className="lead">From</p>
             <input type="date"
                 className="form-control my-3"
-                autoFocus
                 required
                 />
             </div>
@@ -68,7 +65,6 @@ const ApplyPass = () => {
                 <p className="lead">To</p>
                 <input type="date"
                     className="form-control my-3"
-                    autoFocus
                     required
                 />
             </div>
@@ -76,7 +72,6 @@ const ApplyPass = () => {
                 <p className="lead">Reason</p>
                 <input type="text"
                     className="form-control my-3"
-                    autoFocus
                     required
                     placeholder="Please Leave me I wanna go home"
                 />
