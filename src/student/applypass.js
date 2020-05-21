@@ -44,7 +44,6 @@ const ApplyPass = () => {
             } else {
                 setValues({
                     ...values,
-                    info:"",
                     exp_dep_time:"",
                     exp_arr_time:"",
                     from_date:"",

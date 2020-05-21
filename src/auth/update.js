@@ -37,12 +37,11 @@ export const UpdateInfo = (userId,token,values) => {
 }
 
 //get User
-export const getUser = (userId,token) => {
+export const getUser = (userId) => {
     return fetch(`${API}/user/${userId}`,{
         method: "GET",
         headers:{
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`
+            Accept: "application/json"
         }
     })
     .then(response => {

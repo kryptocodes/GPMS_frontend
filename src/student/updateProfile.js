@@ -33,7 +33,7 @@ const UpdateProfile = () => {
     }
 
     const preload = () => {
-        getUser(user._id,token)
+        getUser(user._id)
         .then(data => {
             const {email,roll_no,name,room_no,dept,year,mobile_no,address} = data;
             if(data.error){
