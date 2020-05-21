@@ -2,13 +2,25 @@ import React,{useState} from 'react'
 import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
+import { HomePass } from '../auth/update'
 
 const ApplyPass = () => {
     
-    const [error, setError] = useState(false)
-    const [success, setSuccess] = useState(false)
+    const [values , setValues] = useState({
+        info:"",
+        exp_dep_time:"",
+        exp_arr_time:"",
+        from_date:"",
+        to_date:"",
+        reason:"",
+        success: false
+    })
 
-    const {user: {role}, token} = isAuthenticated()
+    const {info,exp_dep_time,exp_arr_time,from_date,to_date,reason} = values
+
+
+
+    const {user: {_id},token} = isAuthenticated()
 
     const goBack = () => {
         return(
@@ -17,19 +29,50 @@ const ApplyPass = () => {
         </div>
     )}
 
-    const successMessage = () => {
-        if(success) {
-            return <h4 className="alert alert-success text-center">Applied successfully</h4>
-        }
+    const handleChange = name => event => {
+        setValues({ ...values,info:_id,[name]: event.target.value});
+        console.log(values)
+      }
+
+      const onSubmit = event => {
+        event.preventDefault()
+        setValues({...values,error:"",success:false})
+        HomePass(_id,token,values)
+        .then(data => {
+            if(data.error){
+                setValues({...values,error:data.error})
+            } else {
+                setValues({
+                    ...values,
+                    info:"",
+                    exp_dep_time:"",
+                    exp_arr_time:"",
+                    from_date:"",
+                    to_date:"",
+                    reason:"",
+                    success:true
+                })
+            }
+        })
     }
 
-    const warningMessage = () => {
-        if(error) {
-            return <h4 className="alert alert-danger text-center">Failed to apply successfully</h4>
-        }
-    }
+    
 
-    const updateForm = () => {
+    const successMessage = () => (
+        <div className="alert alert-success mt-3"
+        style={{display:values.success ? "" : "none"}}>
+       <h4>pass applied successfully</h4>  
+      </div>
+    )
+
+    const warningMessage = () => (
+        <div className="alert alert-danger mt-3"
+          style={{display:values.error?"": "none"}}>
+          <h4>{values.error}</h4>  
+        </div>
+    )
+
+    const HomePassForm = () => {
         return(
             <form>
             <div className="form-group">
@@ -39,16 +82,18 @@ const ApplyPass = () => {
             <p className="lead">Departure time</p>
             <input type="time"
                 className="form-control my-3"
+                onChange={handleChange("exp_dep_time")}
                 required
-                placeholder="hh:mm"
+                value={exp_dep_time}
                 />
             </div>
             <div className="col-md-3">
                 <p className="lead">Arrival Time</p>
                 <input type="time"
                     className="form-control my-3"
+                    onChange={handleChange("exp_arr_time")}
                     required
-                    placeholder="hh:mm"
+                    value={exp_arr_time}
                 />
             </div>
             </div>
@@ -58,26 +103,31 @@ const ApplyPass = () => {
             <p className="lead">From</p>
             <input type="date"
                 className="form-control my-3"
+                onChange={handleChange("from_date")}
                 required
+                value={from_date}
                 />
             </div>
             <div className="col-md-4">
                 <p className="lead">To</p>
                 <input type="date"
                     className="form-control my-3"
+                    onChange={handleChange("to_date")}
                     required
+                    value={to_date}
                 />
             </div>
                 </div>
                 <p className="lead">Reason</p>
                 <input type="text"
                     className="form-control my-3"
+                    onChange={handleChange("reason")}
                     required
                     placeholder="Please Leave me I wanna go home"
+                    value={reason}
                 />
             </div>
-            
-            <button className="btn btn-outline-success">Apply</button>
+            <button onClick={onSubmit} className="btn btn-outline-success">Apply</button>
             </form>
         )
     }
@@ -89,7 +139,7 @@ const ApplyPass = () => {
         <div className="col-md-8 offset-md-2">
             {successMessage()}
             {warningMessage()}
-            {updateForm()}
+            {HomePassForm()}
             {goBack()}
         </div>
         </div>

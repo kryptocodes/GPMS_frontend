@@ -9,6 +9,7 @@ import UpdatePassword from './auth/updatePassword'
 import UpdateProfile from './student/updateProfile'
 import ApplyPass from './student/applypass'
 import OutPass from './student/outpass'
+import ManagePass from './student/managePass'
 
 export default function Routes() {
     return (
@@ -23,6 +24,7 @@ export default function Routes() {
                     <StudentRoute path="/student/updateprofile" exact component={UpdateProfile}/>
                     <StudentRoute path="/student/gatepass" exact component={ApplyPass}/>
                     <StudentRoute path="/student/outpass" exact component={OutPass}/>
+                    <StudentRoute path="/student/viewpass" exact component={ManagePass}/>
                 </Switch>
             </BrowserRouter>
         </div>
