@@ -1,17 +1,18 @@
 import React,{useState,useEffect} from 'react'
 import Base from '../Home/base'
 import { Link } from 'react-router-dom'
-import { getUser } from '../auth/update'
-import { getAllPass } from '../auth/pass' 
+import { getUserPass } from '../auth/pass' 
+import { isAuthenticated } from '../auth'
 
 
 const ManagePass = () => {
     
     const [values,setValues] = useState([])
-    const [names,setNames] = useState("")
+
+    const {user,token} = isAuthenticated()
 
     const preload = () => {
-        getAllPass()
+        getUserPass(user._id,token)
         .then(data => {
             console.log(data)
             if(data.error){
@@ -24,21 +25,7 @@ const ManagePass = () => {
 
     useEffect(() => {
         preload();
-        loadprofile();
     },[])
-
-    const loadprofile = (id) => {
-        getUser(id)
-        .then(data => {
-            console.log(data)
-        if(data.error){
-            console.log(data.error)
-        } else{
-            setNames(data.name)
-        }
-        })
-        return names
-    }
 
     const passstatus = status => {
         if(status <= 2){
@@ -56,30 +43,45 @@ const ManagePass = () => {
     )}
 
     const passinfo = () => (
-        <ul className="list-group">
+        <React.Fragment>
+        <h1 className="text-center">Displaying {values.length} records</h1>
+        <ul className="container-fluid list-group">
         {values && values.map((pass,index)=> (
             <div key={index}>
-            <li className="list-group-item">
-            <span className="badge badge-success mr-2">Name:</span>{loadprofile(pass.info)}
+            <div className="row m-0">
+            <div className="col-md-5">
+            <li className="list-group-item flex-grow-1 mr-auto">
+            <span className="badge badge-success mr-2">Pass id:</span>{pass._id}
           </li>
+          </div>
+          <div className="col-md-3">
+          <li className="list-group-item mx-auto">
+          <span className="badge badge-success mr-2">Status:</span>{passstatus(pass.status)}
+            </li>
+            </div>
+          </div>
+          <div className="row">
+          <div className="col-md-5">
         <li className="list-group-item">
             <span className="badge badge-success mr-2">Expected leaving time:</span>{pass.exp_dep_time}
         </li>
         <li className="list-group-item">
             <span className="badge badge-success mr-2">Expected arrival time:</span>{pass.exp_arr_time}
         </li>
+        </div>
+        <div className="col-md-5">
         <li className="list-group-item">
             <span className="badge badge-success mr-2">From:</span>{pass.from_date}
         </li>
         <li className="list-group-item">
             <span className="badge badge-success mr-2">To:</span>{pass.to_date}
         </li>
-        <li className="list-group-item">
-            <span className="badge badge-success mr-2">Status:</span>{passstatus(pass.status)}
-        </li>
+        </div>
+        </div>
         </div>
         ))}   
-        </ul>               
+        </ul>      
+        </React.Fragment>         
     )
 
     return (
