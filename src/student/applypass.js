@@ -135,7 +135,7 @@ const ApplyPass = () => {
         <Base title="Home Pass">
         <div className="container">
         <div className="row bg-white rounded">
-        <div className="col-md-8 offset-md-2">
+        <div className="container col-md-8 offset-md-2">
             {successMessage()}
             {warningMessage()}
             {HomePassForm()}

@@ -27,4 +27,25 @@ export const getUserPass = (userId,token) => {
         return response.json()
     })
     .catch(err => console.log(err))
-} 
+}
+
+export const deletePass = (userId,token,passId) => {
+    return fetch(`${API}/pass/delete/${passId}/${userId}`,{
+        method:"DELETE",
+        headers:{
+            Accept:"application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
+
+
+
+
+
+

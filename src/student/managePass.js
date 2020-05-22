@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Base from '../Home/base'
 import { Link } from 'react-router-dom'
-import { getUserPass } from '../auth/pass' 
+import { getUserPass,deletePass } from '../auth/pass' 
 import { isAuthenticated } from '../auth'
 
 
@@ -11,8 +11,8 @@ const ManagePass = () => {
 
     const {user,token} = isAuthenticated()
 
-    const preload = () => {
-        getUserPass(user._id,token)
+    const preload = passId => {
+        getUserPass(user._id,token,passId)
         .then(data => {
             console.log(data)
             if(data.error){
@@ -26,6 +26,19 @@ const ManagePass = () => {
     useEffect(() => {
         preload();
     },[])
+
+    const onSumbit = (passId) => {
+        deletePass(user._id,token,passId)
+        .then(data => {
+            if(data.error){
+                console.log(data.error)
+            } else{
+                preload();
+            }
+        })
+
+    }
+
 
     const passstatus = status => {
         if(status <= 2){
@@ -45,48 +58,47 @@ const ManagePass = () => {
     const passinfo = () => (
         <React.Fragment>
         <h1 className="text-center">Displaying {values.length} records</h1>
-        <ul className="container-fluid list-group">
+        <div className="jumbotron-fluid">
         {values && values.map((pass,index)=> (
-            <div key={index}>
-            <div className="row m-0">
-            <div className="col-md-5">
-            <li className="list-group-item flex-grow-1 mr-auto">
-            <span className="badge badge-success mr-2">Pass id:</span>{pass._id}
-          </li>
-          </div>
-          <div className="col-md-3">
-          <li className="list-group-item mx-auto">
-          <span className="badge badge-success mr-2">Status:</span>{passstatus(pass.status)}
-            </li>
-            </div>
-          </div>
-          <div className="row">
-          <div className="col-md-5">
-        <li className="list-group-item">
+            <div className="card my-4 p-4" key={index}>
+                    <h4 className="card-header bg-dark flex-grow-1 text-white bd-highlight">
+                        <span className="badge badge-success mr-2">Pass id:</span>{pass._id}
+                    </h4>
+        <ul className="list-group">
+        <div className="d-flex flex-column">
+        <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">Expected leaving time:</span>{pass.exp_dep_time}
         </li>
-        <li className="list-group-item">
+        <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">Expected arrival time:</span>{pass.exp_arr_time}
         </li>
         </div>
-        <div className="col-md-5">
-        <li className="list-group-item">
+        <div className="d-flex flex-row">
+        <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">From:</span>{pass.from_date}
         </li>
-        <li className="list-group-item">
+        <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">To:</span>{pass.to_date}
         </li>
         </div>
+        <div className="d-flex flex-row">
+        <li className="list-group-item flex-grow-1">
+            <span className="badge badge-success mr-2">Status:</span>{pass.status}
+        </li>
+        <button type="button" className="btn btn-sm btn-warning">Edit</button>
+        <button onClick={() => {
+            onSumbit(pass._id)}} type="button" className="btn  btn-sm btn-danger">Delete</button>
         </div>
+        </ul>
         </div>
-        ))}   
-        </ul>      
+        ))}      
+        </div>
         </React.Fragment>         
     )
 
     return (
         <Base title="Manage Pass">
-        <div className="container p-2">
+        <div className="container p-2 mx-auto">
         {passinfo()}
         {goBack()}
         </div>
