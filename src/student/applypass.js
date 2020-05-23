@@ -3,6 +3,8 @@ import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
 import { HomePass } from '../auth/update'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ApplyPass = () => {
     
@@ -12,8 +14,7 @@ const ApplyPass = () => {
         exp_arr_time:"",
         from_date:"",
         to_date:"",
-        reason:"",
-        success: false
+        reason:""
     })
 
     const {info,exp_dep_time,exp_arr_time,from_date,to_date,reason} = values
@@ -31,7 +32,6 @@ const ApplyPass = () => {
 
     const handleChange = name => event => {
         setValues({ ...values,info:_id,[name]: event.target.value});
-        console.log(values)
       }
 
       const onSubmit = event => {
@@ -40,7 +40,8 @@ const ApplyPass = () => {
         HomePass(_id,token,values)
         .then(data => {
             if(data.error){
-                setValues({...values,error:data.error})
+                setValues({...values})
+                toast.error(data.error)
             } else {
                 setValues({
                     ...values,
@@ -48,35 +49,20 @@ const ApplyPass = () => {
                     exp_arr_time:"",
                     from_date:"",
                     to_date:"",
-                    reason:"",
-                    success:true
+                    reason:""
                 })
+                toast.success("Applied Successfully")
             }
         })
     }
 
-    
-
-    const successMessage = () => (
-        <div className="alert alert-success mt-3"
-        style={{display:values.success ? "" : "none"}}>
-       <h4>pass applied successfully</h4>  
-      </div>
-    )
-
-    const warningMessage = () => (
-        <div className="alert alert-danger mt-3"
-          style={{display:values.error?"": "none"}}>
-          <h4>{values.error}</h4>  
-        </div>
-    )
-
     const HomePassForm = () => {
         return(
             <form>
-            <div className="form-group">
-            <p className="lead">Time</p>
-            <div className="row m-0">
+            <div className="form-group jumbotron bg-white">
+            <div className="card my-2">
+            <p className="lead card-header text-white bg-dark">Time</p>
+            <div className="row m-0 p-2">
             <div className="col-md-3">
             <p className="lead">Departure time</p>
             <input type="time"
@@ -96,7 +82,9 @@ const ApplyPass = () => {
                 />
             </div>
             </div>
-            <p className="lead">Date</p>
+            </div>
+            <div className="card my-2">
+            <p className="lead card-header text-white bg-dark">Date</p>
             <div className="row m-0">
             <div className="col-md-4">
             <p className="lead">From</p>
@@ -117,30 +105,32 @@ const ApplyPass = () => {
                 />
             </div>
                 </div>
-                <p className="lead">Reason</p>
-                <input type="text"
+                </div>
+                <div className="card my-2">
+                <p className="lead card-header text-white bg-dark">Reason</p>
+                <div className="p-2">
+                <textarea type="text"
                     className="form-control my-3"
                     onChange={handleChange("reason")}
                     required
                     placeholder="Please Leave me I wanna go home"
                     value={reason}
                 />
+                </div>
             </div>
-            <button onClick={onSubmit} className="btn btn-outline-success">Apply</button>
+            <button onClick={onSubmit} className="btn btn-block p-2 btn-outline-success">Apply</button>
+            </div>
             </form>
         )
     }
 
     return (
-        <Base title="Home Pass">
-        <div className="container">
+        <Base title="Home Pass" className="container">
+        <ToastContainer position="top-center"/>
         <div className="row bg-white rounded">
         <div className="container col-md-8 offset-md-2">
-            {successMessage()}
-            {warningMessage()}
             {HomePassForm()}
             {goBack()}
-        </div>
         </div>
         </div>
         </Base>

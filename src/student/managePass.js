@@ -3,6 +3,7 @@ import Base from '../Home/base'
 import { Link } from 'react-router-dom'
 import { getUserPass,deletePass } from '../auth/pass' 
 import { isAuthenticated } from '../auth'
+import Empty from '../assets/empty.svg'
 
 
 const ManagePass = () => {
@@ -39,25 +40,21 @@ const ManagePass = () => {
 
     }
 
-
-    const passstatus = status => {
-        if(status <= 2){
-            return <p>under process</p>
-        } else if(status){
-            return <p>Approved</p>
-        }
-    }
-
     const goBack = () => {
         return(
-        <div className="mt-5">
-        <Link className="btn btn-xl btn-warning mb-3" to="/dashboard">Back</Link>
+        <div className="mt-2 ml-3">
+        <Link className="btn btn-lg btn-warning mb-3" to="/dashboard">Back</Link>
         </div>
     )}
 
     const passinfo = () => (
         <React.Fragment>
+        {goBack()}
         <h1 className="text-center">Displaying {values.length} records</h1>
+        {(values.length == 0) &&
+        (<img src={Empty} className="rounded d-block mx-auto w-75" 
+         alt="empty"/>)
+        }
         <div className="jumbotron-fluid">
         {values && values.map((pass,index)=> (
             <div className="card my-4 p-4" key={index}>
@@ -100,7 +97,6 @@ const ManagePass = () => {
         <Base title="Manage Pass">
         <div className="container p-2 mx-auto">
         {passinfo()}
-        {goBack()}
         </div>
         </Base>
     )

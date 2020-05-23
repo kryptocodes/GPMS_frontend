@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { signin ,authenticate , isAuthenticated } from "../auth/index"
 
 const Signin = () => {
@@ -7,11 +7,11 @@ const Signin = () => {
     email: "",
     password: "",
     error: "",
-    loading: false,
+    buttonText:"Log in",
     didRedirect: false
   })
 
-  const { email,password,error,loading,didRedirect} = values;
+  const { email,password,error,buttonText,didRedirect} = values;
   const { user } = isAuthenticated()
 
   const handleChange = name => event => {
@@ -20,15 +20,16 @@ const Signin = () => {
 
   const onSubmit = event => {
     event.preventDefault()
-    setValues({ ...values,error: false, loading: true})
+    setValues({ ...values,buttonText:"Logging in",error: false, loading: true})
     signin({email,password})
       .then(data => {
         if(data.error) {
-          setValues({ ...values,error:data.error, loading:false})
+          setValues({ ...values,buttonText:"Log in",error:data.error, loading:false})
         } else{
           authenticate(data, () => {
             setValues({
               ...values,
+              buttonText:"Log in",
               didRedirect: true
             })
           })
@@ -37,6 +38,7 @@ const Signin = () => {
       .catch(console.log("sigin request failed"))
   }
 
+  //to perform redirect to dashboard
   const performRedirect = () => {
     if(isAuthenticated()){
     if(didRedirect) {
@@ -49,19 +51,11 @@ const Signin = () => {
   }
 }
 
-  const loadingMessage = () => {
-    return(
-      loading && (
-        <div className="alert alert-info">
-          <h2>Loading...</h2>
-        </div>
-      )
-    )
-  } 
-
+  //error console
   const errorMessage = () => {
     return ( 
-      <div className="alert alert-danger text-center" style={{display: error ? "" : "none"}}>
+      <div className="justify-content-center alert alert-danger text-center" 
+            style={{display: error ? "" : "none"}}>
       {error}
       </div>
     )
@@ -70,8 +64,10 @@ const Signin = () => {
 
   const signInForm = () => {
     return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
+      //signin form 
+      <div className="row m-0">
+        <div className="col-md-7 text-left">
+          {errorMessage()} 
           <form>
             <div className="form-group">
               <label className="text-dark">Username</label>
@@ -93,11 +89,22 @@ const Signin = () => {
                 type="password"
               />
             </div>
+            <p className="lead">Having trouble logging in ?</p>
+            <div className="d-flex flex-row">
+            <div className="mr-2">
             <button 
               onClick={onSubmit}
-              className="btn btn-success btn-block">
-              Submit
+              className="btn btn-info btn-block">
+              {buttonText}
             </button>
+            </div>
+            <div className="mr-2">
+            <button 
+              className="btn btn-danger btn-block">
+              Reset
+            </button>
+            </div>
+            </div>
           </form>
         </div>
       </div>
@@ -106,14 +113,23 @@ const Signin = () => {
 
   return (
       <div> 
-      <div className="jumbotron-fluid bg-success">
-      <h1 className="display-3 text-white text-center p-4">Signin</h1>
+      <div className="jumbotron-fluid bg-info">
+      <h1 className="display-3 text-white text-center p-4">GPMS</h1>
       </div>
-      <div className="container justify-content-center">
-      {loadingMessage()}
-      {errorMessage()}
+      <div className="container p-4 mx-auto">
+      <div className="row py-4 my-4 mx-auto justify-content-center">
+      <div className="col-md-5 my-4 p-4">
+      <a href="https://amrita.edu.in">
+      <img src="http://moodle.amrita.edu.in/pluginfile.php/1/theme_essential/logo/1589905491/Amrita%20logo.png" 
+          className="w-100"
+          alt="Amrita logo"/>
+      </a>
+      </div>
+      <div className="col-md-7">
       {signInForm()}
       {performRedirect()}
+      </div>
+      </div>
       </div>
       </div>
   )

@@ -17,67 +17,51 @@ const OutPass = () => {
         </div>
     )}
 
-    const successMessage = () => {
-        if(success) {
-            return <h4 className="alert alert-success text-center">Applied successfully</h4>
-        }
-    }
-
-    const warningMessage = () => {
-        if(error) {
-            return <h4 className="alert alert-danger text-center">Failed to apply successfully</h4>
-        }
-    }
-
     const updateForm = () => {
         return(
             <form>
-            <div className="form-group">
-            <p className="lead">Time</p>
-            <div className="row m-0">
+            <div className="form-group jumbotron bg-white">
+            <div className="card my-2">
+            <p className="lead card-header text-white bg-dark">Time</p>
+            <div className="row m-0 p-2">
             <div className="col-md-3">
             <p className="lead">Departure time</p>
-            <input type="Time"
+            <input type="time"
                 className="form-control my-3"
-                autoFocus
                 required
-                placeholder="hh:mm"
                 />
             </div>
             <div className="col-md-3">
                 <p className="lead">Arrival Time</p>
-                <input type="Time"
+                <input type="time"
                     className="form-control my-3"
-                    autoFocus
                     required
-                    placeholder="hh:mm"
                 />
             </div>
             </div>
-               <p className="lead">Reason</p>
-                <input type="text"
-                    className="form-control my-3"
-                    autoFocus
-                    required
-                    placeholder="Please I wanna go out"
-                />
             </div>
-            
-            <button className="btn btn-outline-success">Apply</button>
+                <div className="card my-2">
+                <p className="lead card-header text-white bg-dark">Reason</p>
+                <div className="p-2">
+                <textarea type="text"
+                    className="form-control my-3"
+                    required
+                    placeholder="Please Leave me I wanna go home"
+                />
+                </div>
+            </div>
+            <button className="btn btn-block p-2 btn-outline-success">Apply</button>
+            </div>
             </form>
         )
     }
 
     return (
-        <Base title="Out Pass">
-        <div className="container">
+        <Base title="Out Pass" className="container">
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
-            {successMessage()}
-            {warningMessage()}
             {updateForm()}
             {goBack()}
-        </div>
         </div>
         </div>
         </Base>
