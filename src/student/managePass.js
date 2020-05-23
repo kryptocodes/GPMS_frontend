@@ -57,11 +57,16 @@ const ManagePass = () => {
         }
         <div className="jumbotron-fluid">
         {values && values.map((pass,index)=> (
+            <ul className="list-group">
             <div className="card my-4 p-4" key={index}>
-                    <h4 className="card-header bg-dark flex-grow-1 text-white bd-highlight">
-                        <span className="badge badge-success mr-2">Pass id:</span>{pass._id}
-                    </h4>
-        <ul className="list-group">
+                    <h4 className="card-header row m-0 bg-dark text-white bd-highlight">
+                        <div className="col-md-8">
+                        <span><span className="badge badge-success flex-grow-1 mr-2">Pass id:</span>{pass._id}</span>
+                        </div>
+                        <div className="col-md-4">
+                        <span><span className="badge badge-success mr-2">Pass type</span>{pass.pass_type}</span>
+                        </div>
+                     </h4>
         <div className="d-flex flex-column">
         <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">Expected leaving time:</span>{pass.exp_dep_time}
@@ -70,6 +75,7 @@ const ManagePass = () => {
             <span className="badge badge-success mr-2">Expected arrival time:</span>{pass.exp_arr_time}
         </li>
         </div>
+        {(pass.pass_type == "HomePass") && (
         <div className="d-flex flex-row">
         <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">From:</span>{pass.from_date}
@@ -77,17 +83,19 @@ const ManagePass = () => {
         <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">To:</span>{pass.to_date}
         </li>
-        </div>
+        </div>)}
         <div className="d-flex flex-row">
         <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">Status:</span>{pass.status}
         </li>
+        {(pass.status == "Under Process") && (
         <button type="button" className="btn btn-sm btn-warning">Edit</button>
+        )}
         <button onClick={() => {
             onSumbit(pass._id)}} type="button" className="btn  btn-sm btn-danger">Delete</button>
         </div>
-        </ul>
         </div>
+        </ul>
         ))}      
         </div>
         </React.Fragment>         

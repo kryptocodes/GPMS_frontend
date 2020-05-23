@@ -117,15 +117,15 @@ const Signin = () => {
       <h1 className="display-3 text-white text-center p-4">GPMS</h1>
       </div>
       <div className="container p-4 mx-auto">
-      <div className="row py-4 my-4 mx-auto justify-content-center">
-      <div className="col-md-5 my-4 p-4">
+      <div className="row py-4 my-4 offset-md-2">
+      <div className="col-md-4 mt-5">
       <a href="https://amrita.edu.in">
       <img src="http://moodle.amrita.edu.in/pluginfile.php/1/theme_essential/logo/1589905491/Amrita%20logo.png" 
           className="w-100"
           alt="Amrita logo"/>
       </a>
       </div>
-      <div className="col-md-7">
+      <div className="col-md-8">
       {signInForm()}
       {performRedirect()}
       </div>

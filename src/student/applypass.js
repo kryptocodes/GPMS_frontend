@@ -25,8 +25,8 @@ const ApplyPass = () => {
 
     const goBack = () => {
         return(
-        <div className="mt-5">
-        <Link className="btn btn-xl btn-warning mb-3" to="/dashboard">Back</Link>
+        <div className="ml-3">
+        <Link className="btn btn-lg btn-warning mb-4" to="/dashboard">Back</Link>
         </div>
     )}
 
@@ -36,7 +36,7 @@ const ApplyPass = () => {
 
       const onSubmit = event => {
         event.preventDefault()
-        setValues({...values,error:"",success:false})
+        setValues({...values})
         HomePass(_id,token,values)
         .then(data => {
             if(data.error){

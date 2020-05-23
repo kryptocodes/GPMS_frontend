@@ -2,18 +2,51 @@ import React,{useState} from 'react'
 import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
+import { HomePass } from '../auth/update'
+import { ToastContainer, toast } from 'react-toastify'
 
 const OutPass = () => {
-    
-    const [error, setError] = useState(false)
-    const [success, setSuccess] = useState(false)
 
-    const {user: {role}, token} = isAuthenticated()
+    const [values,setValues] = useState({
+        info:"",
+        exp_dep_time:"",
+        exp_arr_time:"",
+        pass_type:"",
+        reason:""
+    })
+
+    const {info,exp_dep_time,exp_arr_time,pass_type,reason} = values
+
+    const {user: {_id}, token} = isAuthenticated()
+
+    const handleChange = name => event => {
+        setValues({...values,pass_type:"Out Pass",info:_id,[name]:event.target.value})
+    }
+
+    const onSubmit = event => {
+        event.preventDefault()
+        setValues({...values})
+        HomePass(_id,token,values)
+        .then(data => {
+            if(data.error){
+                setValues({...values})
+                toast.error(data.error)
+            }
+            else{
+                setValues({...values,
+                    exp_dep_time:"",
+                    exp_arr_time:"",
+                    reason:""
+                })
+                toast.success("Applied Successfully")
+            }
+        })
+    }
 
     const goBack = () => {
         return(
-        <div className="mt-5">
-        <Link className="btn btn-xl btn-warning mb-3" to="/dashboard">Back</Link>
+        <div className="ml-3">
+        <Link className="btn btn-lg btn-warning mb-3" to="/dashboard">Back</Link>
         </div>
     )}
 
@@ -28,14 +61,18 @@ const OutPass = () => {
             <p className="lead">Departure time</p>
             <input type="time"
                 className="form-control my-3"
+                onChange={handleChange("exp_dep_time")}
                 required
+                value={exp_dep_time}
                 />
             </div>
             <div className="col-md-3">
                 <p className="lead">Arrival Time</p>
                 <input type="time"
                     className="form-control my-3"
+                    onChange={handleChange("exp_arr_time")}
                     required
+                    value={exp_arr_time}
                 />
             </div>
             </div>
@@ -45,12 +82,14 @@ const OutPass = () => {
                 <div className="p-2">
                 <textarea type="text"
                     className="form-control my-3"
+                    onChange={handleChange("reason")}
                     required
                     placeholder="Please Leave me I wanna go home"
+                    value={reason}
                 />
                 </div>
             </div>
-            <button className="btn btn-block p-2 btn-outline-success">Apply</button>
+            <button onClick={onSubmit} className="btn btn-block p-2 btn-outline-success">Apply</button>
             </div>
             </form>
         )
@@ -58,6 +97,7 @@ const OutPass = () => {
 
     return (
         <Base title="Out Pass" className="container">
+        <ToastContainer position="top-center"/>
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
             {updateForm()}
