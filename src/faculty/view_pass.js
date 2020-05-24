@@ -1,21 +1,20 @@
 import React,{useState,useEffect} from 'react'
 import Base from '../Home/base'
 import { Link } from 'react-router-dom'
-import { getUserPass,deletePass } from '../auth/pass' 
+import { getFacultyPass } from '../auth/pass' 
 import { isAuthenticated } from '../auth'
 import Empty from '../assets/empty.svg'
 
 
-const ManagePass = () => {
+const ViewPass = () => {
     
     const [values,setValues] = useState([])
 
     const {user,token} = isAuthenticated()
 
     const preload = () => {
-        getUserPass(user._id,token)
+        getFacultyPass(user._id,token)
         .then(data => {
-            console.log(data)
             if(data.error){
                 console.log(data.error)
             } else{
@@ -28,22 +27,11 @@ const ManagePass = () => {
         preload()
     },[])
 
-    const onSumbit = (passId) => {
-        deletePass(user._id,token,passId)
-        .then(data => {
-            if(data.error){
-                console.log(data.error)
-            } else{
-                preload();
-            }
-        })
-
-    }
 
     const goBack = () => {
         return(
         <div className="mt-2 ml-3">
-        <Link className="btn btn-lg btn-warning mb-3" to="/dashboard">Back</Link>
+        <Link className="btn btn-lg btn-warning mb-3" to="/faculty/dashboard">Back</Link>
         </div>
     )}
 
@@ -61,7 +49,7 @@ const ManagePass = () => {
             <div className="card my-4 p-4" key={index}>
                     <h4 className="card-header row m-0 bg-dark text-white bd-highlight">
                         <div className="col-md-8">
-                        <span><span className="badge badge-success flex-grow-1 mr-2">Pass id:</span>{pass._id}</span>
+                        <span><span className="badge badge-success flex-grow-1 mr-2">Name:</span>{pass.info.name}</span>
                         </div>
                         <div className="col-md-4">
                         <span><span className="badge badge-success mr-2">Pass type</span>{pass.pass_type}</span>
@@ -84,15 +72,14 @@ const ManagePass = () => {
             <span className="badge badge-success mr-2">To:</span>{pass.to_date}
         </li>
         </div>)}
-        <div className="d-flex flex-row">
+        <div className="row m-0">
         <li className="list-group-item flex-grow-1">
-            <span className="badge badge-success mr-2">Status:</span>{pass.status}
+            <span className="badge badge-success mr-2">Reason:</span>{pass.reason}
         </li>
-        {(pass.status === "Under Process") && (
-        <button type="button" className="btn btn-sm btn-warning">Edit</button>
-        )}
-        <button onClick={() => {
-            onSumbit(pass._id)}} type="button" className="btn  btn-sm btn-danger">Delete</button>
+        <div className="d-flex">
+        <button type="button" className="btn btn-sm btn-warning mr-3">Approve</button>
+        <button type="button" className="btn btn-sm btn-danger">Decline</button>
+        </div>
         </div>
         </div>
         </ul>
@@ -110,4 +97,4 @@ const ManagePass = () => {
     )
 }
 
-export default ManagePass
+export default ViewPass

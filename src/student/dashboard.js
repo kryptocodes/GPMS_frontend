@@ -36,7 +36,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         preload();
-    },[])
+    })
    
 
     const student = () => {
@@ -73,7 +73,7 @@ const Dashboard = () => {
                     Change Password
                 </Link>
                 <Link 
-                className="btn float-right text-center btn-info"
+                className="btn text-center btn-info"
                 to="/student/updateprofile"
                 >
                 Edit

@@ -3,14 +3,6 @@ import {Link, withRouter} from "react-router-dom"
 import {signout , isAuthenticated } from '../auth'
 
 
-const currentTab = (history, path) => {
-    if(history.location.pathname === path){
-        return {color: '#0099ff'}
-    } else{
-        return {color: "#FFFFFF"}
-    }
-}
-
 const Nav = ({history}) => (
     <div>
         <nav className="navbar navbar-light bg-dark">

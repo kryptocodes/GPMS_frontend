@@ -3,23 +3,19 @@ import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
 import { UpdateInfo, getUser } from '../auth/update'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-const UpdateProfile = () => {
+const UpdateFacultyInfo = () => {
     
     const [values , setValues] = useState({
         email:"",
-        roll_no:"",
         name:"",
-        room_no:"",
         dept:"",
-        year:"",
-        mobile_no:"",
-        address:"",
-        error: "",
-        success: false
+        year:""
     })
 
-    const {email,roll_no,name,room_no,dept,year,mobile_no,address} = values
+    const {email,name,dept,year} = values
 
     const {user, token} = isAuthenticated()
 
@@ -27,7 +23,7 @@ const UpdateProfile = () => {
     ) => {
         return (
             <div className="mt-5">
-            <Link className="btn btn-xl btn-warning mb-3" to="/dashboard">Back</Link>
+            <Link className="btn btn-xl btn-warning mb-3" to="/faculty/dashboard">Back</Link>
             </div>
         )
     }
@@ -35,11 +31,12 @@ const UpdateProfile = () => {
     const preload = () => {
         getUser(user._id)
         .then(data => {
-            const {email,roll_no,name,room_no,dept,year,mobile_no,address} = data;
+            const {email,name,dept,year} = data;
             if(data.error){
-                setValues({...values,error:data.error})
+                setValues({...values})
+                toast.error(data.error)
             } else{
-                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address})
+                setValues({...values,email,name,dept,year})
             }
         })
     }
@@ -61,27 +58,15 @@ const UpdateProfile = () => {
         .then(data => {
             if(data.error){
                 setValues({...values})
+                toast.error(data.error)
             } else {
                 setValues({
                     ...values
                 })
+                toast.success("Updated Successfully")
             }
         })
     }
-
-    const successMessage = () => (
-        <div className="alert alert-success mt-3"
-        style={{display:values.success ? "" : "none"}}>
-       <h4>Profile updated successfully </h4>  
-      </div>
-    )
-
-    const warningMessage = () => (
-        <div className="alert alert-danger mt-3"
-          style={{display:values.error?"": "none"}}>
-         <h4>failed to update profile </h4>  
-        </div>
-    )
 
     const updateForm = () => {
         return(
@@ -100,20 +85,6 @@ const UpdateProfile = () => {
                     required
                     value={name}
                 />
-                <p className="lead">roll_no</p>
-                <input type="text"
-                    className="form-control my-3"
-                    onChange={handleChange("roll_no")}
-                    disabled
-                    value={roll_no}
-                />
-                <p className="lead">Room No</p>
-                <input type="text"
-                    className="form-control my-3"
-                    onChange={handleChange("room_no")}
-                    required
-                    value={room_no}
-                />
                 <p className="lead">year</p>
                 <input type="text"
                     className="form-control my-3"
@@ -128,20 +99,6 @@ const UpdateProfile = () => {
                     required
                     value={dept}
                 />
-                <p className="lead">Mobile No</p>
-                <input type="text"
-                    className="form-control my-3"
-                    onChange={handleChange("mobile_no")}
-                    required
-                    value={mobile_no}
-                />
-                <p className="lead">address</p>
-                <input type="text"
-                    className="form-control my-3"
-                    onChange={handleChange("address")}
-                    required
-                    value={address}
-                />
             </div>
             
             <button onClick={onSubmit} className="btn btn-outline-success">Update profile</button>
@@ -150,15 +107,12 @@ const UpdateProfile = () => {
     }
 
     return (
-        <Base title="Profile">
-        <div className="container">
+        <Base title="Profile" className="container">
+        <ToastContainer position="top-center"/>
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
             {updateForm()}
-            {successMessage()}
-            {warningMessage()}
             {goBack()}
-        </div>
         </div>
         </div>
         </Base>
@@ -171,4 +125,4 @@ const UpdateProfile = () => {
 
 
 
-export default UpdateProfile
+export default UpdateFacultyInfo

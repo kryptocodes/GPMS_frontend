@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
-import { HomePass } from '../auth/update'
+import { createPass } from '../auth/pass'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -10,6 +10,8 @@ const ApplyPass = () => {
     
     const [values , setValues] = useState({
         info:"",
+        dept:"",
+        year:"",
         exp_dep_time:"",
         exp_arr_time:"",
         from_date:"",
@@ -17,11 +19,11 @@ const ApplyPass = () => {
         reason:""
     })
 
-    const {info,exp_dep_time,exp_arr_time,from_date,to_date,reason} = values
+    const {exp_dep_time,exp_arr_time,from_date,to_date,reason} = values
 
 
 
-    const {user: {_id},token} = isAuthenticated()
+    const {user: {_id,year,dept},token} = isAuthenticated()
 
     const goBack = () => {
         return(
@@ -31,13 +33,14 @@ const ApplyPass = () => {
     )}
 
     const handleChange = name => event => {
-        setValues({ ...values,info:_id,[name]: event.target.value});
+        setValues({ ...values,dept:dept,year:year,info:_id,[name]: event.target.value});
+        console.log(values)
       }
 
       const onSubmit = event => {
         event.preventDefault()
         setValues({...values})
-        HomePass(_id,token,values)
+        createPass(_id,token,values)
         .then(data => {
             if(data.error){
                 setValues({...values})

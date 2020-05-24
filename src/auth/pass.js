@@ -29,6 +29,23 @@ export const getUserPass = (userId,token) => {
     .catch(err => console.log(err))
 }
 
+export const getFacultyPass = (userId,token) => {
+    return fetch(`${API}/pass/student/${userId}`, {
+        method: "GET",
+        headers:{
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(response =>{
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
+
+
+
 export const deletePass = (userId,token,passId) => {
     return fetch(`${API}/pass/delete/${passId}/${userId}`,{
         method:"DELETE",
@@ -42,6 +59,23 @@ export const deletePass = (userId,token,passId) => {
     })
     .catch(err => console.log(err))
 }
+
+export const createPass = (userId,token,values) => {
+    return fetch(`${API}/pass/homepass/${userId}`,{
+        method:"POST",
+        headers:{
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(values)
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
 
 
 

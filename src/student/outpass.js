@@ -2,31 +2,33 @@ import React,{useState} from 'react'
 import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
-import { HomePass } from '../auth/update'
+import { createPass } from '../auth/pass'
 import { ToastContainer, toast } from 'react-toastify'
 
 const OutPass = () => {
 
     const [values,setValues] = useState({
         info:"",
+        dept:"",
+        year:"",
         exp_dep_time:"",
         exp_arr_time:"",
         pass_type:"",
         reason:""
     })
 
-    const {info,exp_dep_time,exp_arr_time,pass_type,reason} = values
+    const {exp_dep_time,exp_arr_time,reason} = values
 
-    const {user: {_id}, token} = isAuthenticated()
+    const {user: {_id,year,dept}, token} = isAuthenticated()
 
     const handleChange = name => event => {
-        setValues({...values,pass_type:"Out Pass",info:_id,[name]:event.target.value})
+        setValues({...values,dept:dept,year:year,pass_type:"Out Pass",info:_id,[name]:event.target.value})
     }
 
     const onSubmit = event => {
         event.preventDefault()
         setValues({...values})
-        HomePass(_id,token,values)
+        createPass(_id,token,values)
         .then(data => {
             if(data.error){
                 setValues({...values})
