@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { signin ,authenticate , isAuthenticated } from "../auth/index"
+import logo from '../assets/logo.png'
 
 const Signin = () => {
   const [values , setValues] = useState({
@@ -120,7 +121,7 @@ const Signin = () => {
       <div className="row py-4 my-4 offset-md-2">
       <div className="col-md-4 mt-5">
       <a href="https://amrita.edu.in">
-      <img src="http://moodle.amrita.edu.in/pluginfile.php/1/theme_essential/logo/1589905491/Amrita%20logo.png" 
+      <img src={logo} 
           className="w-100"
           alt="Amrita logo"/>
       </a>

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Base from '../Home/base'
 import { Link } from 'react-router-dom'
-import { getFacultyPass } from '../auth/pass' 
+import { getFacultyPass,updateStatus } from '../auth/pass' 
 import { isAuthenticated } from '../auth'
 import Empty from '../assets/empty.svg'
 
@@ -9,6 +9,7 @@ import Empty from '../assets/empty.svg'
 const ViewPass = () => {
     
     const [values,setValues] = useState([])
+
 
     const {user,token} = isAuthenticated()
 
@@ -27,6 +28,19 @@ const ViewPass = () => {
         preload()
     },[])
 
+    const onSubmit = (passId,status) => {
+        console.log(status)
+        updateStatus(user._id,token,passId,status)
+        .then(data => {
+            if(data.error){
+                console.log(data.error)
+            }
+            else{
+                preload()
+                console.log(data)
+            }
+        })
+    }
 
     const goBack = () => {
         return(
@@ -74,10 +88,10 @@ const ViewPass = () => {
         </div>)}
         <div className="row m-0">
         <li className="list-group-item flex-grow-1">
-            <span className="badge badge-success mr-2">Reason:</span>{pass.reason}
+            <p className="text-justify"><span className="badge badge-success mr-2">Reason:</span>{pass.reason}</p>
         </li>
         <div className="d-flex">
-        <button type="button" className="btn btn-sm btn-warning mr-3">Approve</button>
+        <button onClick={() =>{onSubmit(pass._id,{status:"Approved"})}}  type="button" className="btn btn-sm btn-warning mr-3">Approve</button>
         <button type="button" className="btn btn-sm btn-danger">Decline</button>
         </div>
         </div>
