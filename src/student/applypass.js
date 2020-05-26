@@ -65,9 +65,9 @@ const ApplyPass = () => {
             <div className="form-group jumbotron bg-white">
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Time</p>
-            <div className="row m-0 p-2">
-            <div className="col-md-3">
-            <p className="lead">Departure time</p>
+            <div className="row mx-auto p-2">
+            <div className="col-md-5">
+            <p className="lead">Expected leaving time</p>
             <input type="time"
                 className="form-control my-3"
                 onChange={handleChange("exp_dep_time")}
@@ -75,8 +75,8 @@ const ApplyPass = () => {
                 value={exp_dep_time}
                 />
             </div>
-            <div className="col-md-3">
-                <p className="lead">Arrival Time</p>
+            <div className="col-md-5">
+                <p className="lead">Expected arrival time</p>
                 <input type="time"
                     className="form-control my-3"
                     onChange={handleChange("exp_arr_time")}
@@ -88,8 +88,8 @@ const ApplyPass = () => {
             </div>
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Date</p>
-            <div className="row m-0">
-            <div className="col-md-4">
+            <div className="row mx-auto p-2">
+            <div className="col-md-6">
             <p className="lead">From</p>
             <input type="date"
                 className="form-control my-3"
@@ -98,7 +98,7 @@ const ApplyPass = () => {
                 value={from_date}
                 />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-6">
                 <p className="lead">To</p>
                 <input type="date"
                     className="form-control my-3"

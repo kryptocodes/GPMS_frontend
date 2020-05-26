@@ -58,9 +58,9 @@ const OutPass = () => {
             <div className="form-group jumbotron bg-white">
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Time</p>
-            <div className="row m-0 p-2">
-            <div className="col-md-3">
-            <p className="lead">Departure time</p>
+            <div className="row mx-auto p-2">
+            <div className="col-md-5">
+            <p className="lead">Expected leaving time</p>
             <input type="time"
                 className="form-control my-3"
                 onChange={handleChange("exp_dep_time")}
@@ -68,8 +68,8 @@ const OutPass = () => {
                 value={exp_dep_time}
                 />
             </div>
-            <div className="col-md-3">
-                <p className="lead">Arrival Time</p>
+            <div className="col-md-5">
+                <p className="lead">Expected arrival time</p>
                 <input type="time"
                     className="form-control my-3"
                     onChange={handleChange("exp_arr_time")}

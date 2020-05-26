@@ -91,6 +91,9 @@ const ManagePass = () => {
         {(pass.status === "Under Process") && (
         <button type="button" className="btn btn-sm btn-warning">Edit</button>
         )}
+        {(pass.status== "Approved") && (
+            <Link className="btn btn-sm btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>Generate QR</Link>
+        )}
         <button onClick={() => {
             onSumbit(pass._id)}} type="button" className="btn  btn-sm btn-danger">Delete</button>
         </div>
