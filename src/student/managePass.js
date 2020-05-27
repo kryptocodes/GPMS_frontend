@@ -56,7 +56,7 @@ const ManagePass = () => {
          alt="empty"/>)
         }
         <div className="jumbotron-fluid">
-        {values && values.map((pass,index)=> (
+        {values && values.map((pass,index) => (
             <ul className="list-group">
             <div className="card my-4 p-4" key={index}>
                     <h4 className="card-header row m-0 bg-dark text-white bd-highlight">
@@ -89,13 +89,13 @@ const ManagePass = () => {
             <span className="badge badge-success mr-2">Status:</span>{pass.status}
         </li>
        
-        {(pass.status== "Approved") && (
-            <Link className="btn justify-content-center p-2 btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>Generate QR</Link>
+        {(pass.status === "Approved") && (
+            <Link className="btn p-2 btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>Generate QR</Link>
         )}
         {(pass.status === "Under Process") && ( <React.Fragment>
-            <Link className="btn btn-sm btn-warning mr-2" to={`/student/pass/editpass/${pass._id}`}>Edit</Link>
+            <Link className="btn p-1 btn-warning mr-2"  to={`/student/pass/editpass/${pass._id}`}>Edit</Link>
         <button onClick={() => {
-            onSumbit(pass._id)}} type="button" className="btn justify-content-center btn-sm btn-danger">Delete</button>
+            onSumbit(pass._id)}} className="btn btn-sm p-1 btn-danger">Delete</button>
         </React.Fragment>   
         )}
         </div>

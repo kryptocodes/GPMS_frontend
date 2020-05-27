@@ -2,7 +2,9 @@ import React,{useState,useEffect} from 'react'
 import Base from '../Home/base'
 import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth'
-import { getPass } from '../auth/pass'
+import { getPass,updatePass } from '../auth/pass'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const EditPass = ({match}) => {
     
@@ -20,24 +22,24 @@ const EditPass = ({match}) => {
     const {user,token} = isAuthenticated()
 
     const handleChange = name => event => {
-        setValues({...values,[name]:event.target.value})
-    }
+        setValues({...values,[name]:event.target.value});
+      }
 
     const preload = passId => {
         getPass(passId)
         .then(data => {
-            const {pass_type,exp_arr_time,exp_dep_time,from_date,to_date,reason} = data
             if(data.error){
                 console.log(data.error)
             } else{
                 setValues({
                     ...values,
-                    pass_type,
-                    exp_dep_time,
-                    exp_arr_time,
-                    from_date,
-                    to_date,
-                    reason
+                    _id:data._id,
+                    pass_type:data.pass_type,
+                    exp_dep_time:data.exp_dep_time,
+                    exp_arr_time:data.exp_arr_time,
+                    from_date:data.from_date,
+                    to_date:data.to_date,
+                    reason:data.reason
                 })
             }
         })
@@ -47,9 +49,23 @@ const EditPass = ({match}) => {
           preload(match.params.passId)
       }, [])
 
-      const onSumbit = () => {
-          
-      }
+      const onSumbit = (event) => {
+          event.preventDefault()
+          console.log(values)
+          setValues({...values})
+          updatePass(user._id,token,match.params.passId,values)
+          .then(data => {
+            if(data.error){
+                setValues({...values})
+                toast.error(data.error)
+            } else {
+                setValues({
+                    ...values
+                })
+                toast.success("Updated Successfully")
+            }
+        })
+    }
 
     const goBack = () => {
         return(
@@ -72,7 +88,6 @@ const EditPass = ({match}) => {
             <input type="time"
                 className="form-control my-3"
                 onChange={handleChange("exp_dep_time")}
-                required
                 value={exp_dep_time}
                 />
             </div>
@@ -81,7 +96,6 @@ const EditPass = ({match}) => {
                 <input type="time"
                     className="form-control my-3"
                     onChange={handleChange("exp_arr_time")}
-                    required
                     value={exp_arr_time}
                 />
             </div>
@@ -96,7 +110,6 @@ const EditPass = ({match}) => {
             <input type="date"
                 className="form-control my-3"
                 onChange={handleChange("from_date")}
-                required
                 value={from_date}
                 />
             </div>
@@ -105,7 +118,6 @@ const EditPass = ({match}) => {
                 <input type="date"
                     className="form-control my-3"
                     onChange={handleChange("to_date")}
-                    required
                     value={to_date}
                 />
             </div>
@@ -118,12 +130,11 @@ const EditPass = ({match}) => {
                 <textarea type="text"
                     className="form-control my-3"
                     onChange={handleChange("reason")}
-                    required
                     value={reason}
                 />
                 </div>
             </div>
-            <button  className="btn btn-block p-2 btn-outline-success">Apply</button>
+            <button onClick={onSumbit} className="btn btn-block p-2 btn-outline-success">Apply</button>
             </div>
             </form>
         )
@@ -132,6 +143,7 @@ const EditPass = ({match}) => {
 
     return (
         <Base title="Edit Pass" className="container">
+        <ToastContainer position="top-center"/>
         {goBack()}
         {PassForm()}
         </Base>

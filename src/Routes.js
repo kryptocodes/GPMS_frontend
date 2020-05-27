@@ -5,6 +5,7 @@ import Dashboard from './student/dashboard'
 import FacultyDashboard from './faculty/faculty_dashboard'
 import StudentRoute from './auth/studentDashboard'
 import FacultyRoute from './auth/facultyDashboard'
+import SecurityRoute from './auth/security'
 import UpdatePassword from './auth/updatePassword'
 import UpdateProfile from './student/updateProfile'
 import ApplyPass from './student/applypass'
@@ -14,6 +15,8 @@ import ViewPass from './faculty/view_pass'
 import UpdateFacultyInfo from './faculty/updateInfo'
 import QR_code from './student/qrcode'
 import EditPass from './student/editPass'
+import SecurityDashboard from './security/security_dashboard'
+import Entry_check from './security/entry_check'
 
 export default function Routes() {
     return (
@@ -25,6 +28,7 @@ export default function Routes() {
                     <FacultyRoute path="/faculty/updatepassword" exact component={UpdatePassword}/>
                     <FacultyRoute path="/faculty/updateInfo" exact component={UpdateFacultyInfo}/>
                     <FacultyRoute path="/faculty/viewpass" exact component={ViewPass}/>
+
                     <StudentRoute path="/dashboard" exact component={Dashboard}/>
                     <StudentRoute path="/student/updatepassword" exact component={UpdatePassword}/>
                     <StudentRoute path="/student/updateprofile" exact component={UpdateProfile}/>
@@ -33,6 +37,10 @@ export default function Routes() {
                     <StudentRoute path="/student/viewpass" exact component={ManagePass}/>
                     <StudentRoute path="/student/pass/qrcode/:passId" exact component={QR_code}/>
                     <StudentRoute path="/student/pass/editpass/:passId" exact component={EditPass}/>
+                   
+                    <SecurityRoute path="/security/dashboard" exact component={SecurityDashboard}/>
+                    <SecurityRoute path="/security/entry" exact component={Entry_check}/>
+
                 </Switch>
             </BrowserRouter>
         </div>

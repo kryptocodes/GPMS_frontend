@@ -50,7 +50,6 @@ const UpdateProfile = () => {
 
     const handleChange = name => event => {
         setValues({...values,[name]:event.target.value});
-        console.log(values)
       }
 
     const onSubmit = event => {

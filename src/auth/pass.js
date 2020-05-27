@@ -43,12 +43,26 @@ export const getFacultyPass = (userId,token) => {
     .catch(err => console.log(err))
 }
 
+export const updatePass = (userId,token,passId,values) => {
+    return fetch(`${API}/pass/updatepass/${passId}/${userId}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(values)
+      }
+    )
+      .then(response => {
+        return response.json();
+      })
+      .catch(err => console.log(err));
+  };
 
 
 export const updateStatus = (userId,token,passId,status) => {
-    return fetch(
-      `${API}/pass/${passId}/status/${userId}`,
-      {
+    return fetch(`${API}/pass/${passId}/status/${userId}`, {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
