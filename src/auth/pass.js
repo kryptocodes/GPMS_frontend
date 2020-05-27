@@ -3,7 +3,7 @@ import { API } from '../backend'
 
 
 export const getPass = (passId) =>{
-    fetch(`${API}/pass/${passId}`,{
+    return fetch(`${API}/pass/${passId}`,{
         method:"GET",
         headers:{
             Accept: "application/json",

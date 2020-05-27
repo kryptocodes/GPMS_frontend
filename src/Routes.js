@@ -13,6 +13,7 @@ import ManagePass from './student/managePass'
 import ViewPass from './faculty/view_pass'
 import UpdateFacultyInfo from './faculty/updateInfo'
 import QR_code from './student/qrcode'
+import EditPass from './student/editPass'
 
 export default function Routes() {
     return (
@@ -31,6 +32,7 @@ export default function Routes() {
                     <StudentRoute path="/student/outpass" exact component={OutPass}/>
                     <StudentRoute path="/student/viewpass" exact component={ManagePass}/>
                     <StudentRoute path="/student/pass/qrcode/:passId" exact component={QR_code}/>
+                    <StudentRoute path="/student/pass/editpass/:passId" exact component={EditPass}/>
                 </Switch>
             </BrowserRouter>
         </div>

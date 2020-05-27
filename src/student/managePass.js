@@ -88,14 +88,16 @@ const ManagePass = () => {
         <li className="list-group-item flex-grow-1">
             <span className="badge badge-success mr-2">Status:</span>{pass.status}
         </li>
-        {(pass.status === "Under Process") && (
-        <button type="button" className="btn btn-sm btn-warning">Edit</button>
-        )}
+       
         {(pass.status== "Approved") && (
-            <Link className="btn btn-sm btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>Generate QR</Link>
+            <Link className="btn justify-content-center p-2 btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>Generate QR</Link>
         )}
+        {(pass.status === "Under Process") && ( <React.Fragment>
+            <Link className="btn btn-sm btn-warning mr-2" to={`/student/pass/editpass/${pass._id}`}>Edit</Link>
         <button onClick={() => {
-            onSumbit(pass._id)}} type="button" className="btn  btn-sm btn-danger">Delete</button>
+            onSumbit(pass._id)}} type="button" className="btn justify-content-center btn-sm btn-danger">Delete</button>
+        </React.Fragment>   
+        )}
         </div>
         </div>
         </ul>
