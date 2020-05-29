@@ -5,7 +5,7 @@ import { getPass, updatePost } from '../auth/pass'
 import { isAuthenticated } from '../auth'
 import { Link } from'react-router-dom'
 
-const Entry_check = () => {
+const Exit_check = () => {
 
     const [values,setValues] = useState({
         showQR:true,
@@ -19,8 +19,7 @@ const Entry_check = () => {
         dept:"",
         year:"",
         place:"",
-        exit:"",
-        entry:new Date().toLocaleString()
+        exit:new Date().toLocaleString()
     })
 
     const {user,token} = isAuthenticated()
@@ -36,8 +35,7 @@ const Entry_check = () => {
           dept,
           year,
           place,
-          exit,
-          entry
+          exit
         } = values
 
     const handleScan = value => {
@@ -60,24 +58,23 @@ const Entry_check = () => {
                     room_no:data.info.room_no,
                     dept:data.dept,
                     year:data.year,
-                    place:data.info.address,
-                    exit:data.exit
+                    place:data.info.address
                 })
-                Entry(data._id)
-                console.log(data.exit)
+                console.log(values)
+                Exit(data._id)
             }
         })
 
     }
     }
 
-    const Entry = (passId) => {
-        updatePost(user._id,token,passId,{entry:entry})
+    const Exit = (passId) => {
+        updatePost(user._id,token,passId,{exit:exit})
         .then(data => {
           if(data.error){
               console.log(data.error)
           } else {
-              console.log(entry)
+              console.log(exit)
           }
       })
   }
@@ -135,10 +132,7 @@ const Entry_check = () => {
             </li>
             </div>
             <li className="list-group-item flex-grow-1">
-            <span className="badge badge-success mr-2">Exit Date and Time:</span>{exit}
-            </li>
-            <li className="list-group-item flex-grow-1">
-                <span className="badge badge-success mr-2">Entry Date and Time:</span>{entry}
+                <span className="badge badge-success mr-2">Exit Date and Time:</span>{exit}
             </li>
             </div>
             </ul> 
@@ -153,7 +147,7 @@ const Entry_check = () => {
 
 
     return (
-        <Base title="Entry" className="container p-2">
+        <Base title="Exit" className="container p-2">
         {goBack()}
         <div className="row m-0">
         {showQR && (
@@ -189,4 +183,4 @@ const Entry_check = () => {
 
 
 
-export default Entry_check
+export default Exit_check

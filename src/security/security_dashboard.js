@@ -22,7 +22,7 @@ const SecurityDashboard = () => {
         </div>
         <div className="col-md-3 p-2 mx-auto">
         <div className="card px-2 py-4 h-100 d-flex align-items-center">
-             <Link><img src="https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/SANMS06_sandleford_exit_sign_300_x_200mm.jpg" 
+             <Link to="/security/exit"><img src="https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/SANMS06_sandleford_exit_sign_300_x_200mm.jpg" 
              className="w-100 mx-auto" alt="log"/>
             <h3 className="lead text-center p-2">Exit</h3></Link>      
         </div>      

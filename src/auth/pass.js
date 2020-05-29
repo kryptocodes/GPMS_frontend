@@ -78,6 +78,24 @@ export const updateStatus = (userId,token,passId,status) => {
       .catch(err => console.log(err));
   };
 
+  export const updatePost = (userId,token,passId,values) => {
+    return fetch(`${API}/pass/${passId}/post/${userId}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(values)
+      }
+    )
+      .then(response => {
+        return response.json();
+      })
+      .catch(err => console.log(err));
+  };
+
+
 
 export const deletePass = (userId,token,passId) => {
     return fetch(`${API}/pass/delete/${passId}/${userId}`,{
