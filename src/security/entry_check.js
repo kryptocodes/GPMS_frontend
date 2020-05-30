@@ -63,7 +63,7 @@ const Entry_check = () => {
                     place:data.info.address,
                     exit:data.exit
                 })
-                Entry(data._id)
+                Entry(data)
                 console.log(data.exit)
             }
         })
@@ -71,8 +71,8 @@ const Entry_check = () => {
     }
     }
 
-    const Entry = (passId) => {
-        updatePost(user._id,token,passId,{entry:entry})
+    const Entry = (pass) => {
+        updatePost(user._id,token,pass._id,{entry:entry,exit:pass.exit})
         .then(data => {
           if(data.error){
               console.log(data.error)
