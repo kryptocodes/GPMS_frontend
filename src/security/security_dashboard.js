@@ -8,9 +8,9 @@ const SecurityDashboard = () => {
         <div className="row m-0">
         <div className="col-md-3 p-2 mx-auto">
         <div className="card px-2 py-4 h-100 d-flex align-items-center">
-             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQLHZXHf638nwRddOBMp2EGTqaIg95wuWNA6buppAOh7QBN8p-S&usqp=CAU" 
+            <Link to="/security/logs"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQLHZXHf638nwRddOBMp2EGTqaIg95wuWNA6buppAOh7QBN8p-S&usqp=CAU" 
              className="w-100 mx-auto" alt="log"/>
-            <h3 className="lead p-2">Log</h3>
+            <h3 className="lead text-center p-2">Logs</h3></Link>
         </div>      
         </div>
         <div className="col-md-3 p-2 mx-auto">

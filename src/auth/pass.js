@@ -127,7 +127,18 @@ export const createPass = (userId,token,values) => {
     .catch(err => console.log(err))
 }
 
-
+export const getLogs = () =>{
+  return fetch(`${API}/pass/security/logs`,{
+      method:"GET",
+      headers:{
+          Accept: "application/json",
+      }
+  })
+  .then(response =>{
+      return response.json()
+  })
+  .catch(err => console.log(err))
+}
 
 
 
