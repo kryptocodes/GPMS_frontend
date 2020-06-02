@@ -92,7 +92,7 @@ const ViewPass = () => {
         </li>
         <div className="d-flex">
         <button onClick={() =>{onSubmit(pass._id,{status:"Approved"})}}  type="button" className="btn btn-sm btn-warning mr-3">Approve</button>
-        <button type="button" className="btn btn-sm btn-danger">Decline</button>
+        <button onClick={() =>{onSubmit(pass._id,{status:"Declined"})}} type="button" className="btn btn-sm btn-danger">Decline</button>
         </div>
         </div>
         </div>
