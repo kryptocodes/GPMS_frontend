@@ -53,9 +53,6 @@ const Dashboard = () => {
                     <li className="list-group-item">
                     <Link to="/student/viewpass" className="nav-link text-info">View Pass Status</Link>
                     </li>
-                    <li className="list-group-item">
-                    <Link to="/student/qrcode" className="nav-link text-info">QR Code</Link>
-                    </li>
                 </ul>
             </div>
         )

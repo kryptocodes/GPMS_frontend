@@ -47,6 +47,7 @@ const ManagePass = () => {
         </div>
     )}
 
+
     const passinfo = () => (
         <React.Fragment>
         {goBack()}
@@ -57,8 +58,8 @@ const ManagePass = () => {
         }
         <div className="jumbotron-fluid">
         {values && values.map((pass,index) => (
-            <ul className="list-group">
-            <div className="card my-4 p-4" key={index}>
+            <ul className="list-group" key={index}>
+            <div className="card my-4 p-4">
                     <h4 className="card-header row m-0 bg-dark text-white bd-highlight">
                         <div className="col-md-8">
                         <span><span className="badge badge-success flex-grow-1 mr-2">Pass id:</span>{pass._id}</span>

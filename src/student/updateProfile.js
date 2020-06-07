@@ -3,6 +3,8 @@ import Base from '../Home/base'
 import {Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
 import { UpdateInfo, getUser } from '../auth/update'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const UpdateProfile = () => {
     
@@ -15,7 +17,6 @@ const UpdateProfile = () => {
         year:"",
         mobile_no:"",
         address:"",
-        error: "",
         success: false
     })
 
@@ -37,7 +38,7 @@ const UpdateProfile = () => {
         .then(data => {
             const {email,roll_no,name,room_no,dept,year,mobile_no,address} = data;
             if(data.error){
-                setValues({...values,error:data.error})
+                setValues({...values})
             } else{
                 setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address})
             }
@@ -60,10 +61,12 @@ const UpdateProfile = () => {
         .then(data => {
             if(data.error){
                 setValues({...values})
+                toast.error(data.error)
             } else {
                 setValues({
                     ...values
                 })
+                toast.success("Updated Successfully")
             }
         })
     }
@@ -150,6 +153,7 @@ const UpdateProfile = () => {
 
     return (
         <Base title="Profile">
+        <ToastContainer position="top-center"/>
         <div className="container">
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
