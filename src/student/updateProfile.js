@@ -5,6 +5,7 @@ import { isAuthenticated } from '../auth/'
 import { UpdateInfo, getUser } from '../auth/update'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import LoadingScreen from '../Home/loadingScreen'
 
 const UpdateProfile = () => {
     
@@ -17,10 +18,10 @@ const UpdateProfile = () => {
         year:"",
         mobile_no:"",
         address:"",
-        success: false
+        loading:true
     })
 
-    const {email,roll_no,name,room_no,dept,year,mobile_no,address} = values
+    const {email,roll_no,name,room_no,dept,year,mobile_no,address,loading} = values
 
     const {user, token} = isAuthenticated()
 
@@ -40,7 +41,7 @@ const UpdateProfile = () => {
             if(data.error){
                 setValues({...values})
             } else{
-                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address})
+                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address,loading:false})
             }
         })
     }
@@ -70,20 +71,6 @@ const UpdateProfile = () => {
             }
         })
     }
-
-    const successMessage = () => (
-        <div className="alert alert-success mt-3"
-        style={{display:values.success ? "" : "none"}}>
-       <h4>Profile updated successfully </h4>  
-      </div>
-    )
-
-    const warningMessage = () => (
-        <div className="alert alert-danger mt-3"
-          style={{display:values.error?"": "none"}}>
-         <h4>failed to update profile </h4>  
-        </div>
-    )
 
     const updateForm = () => {
         return(
@@ -155,14 +142,14 @@ const UpdateProfile = () => {
         <Base title="Profile">
         <ToastContainer position="top-center"/>
         <div className="container">
+        {loading && <LoadingScreen/>}
+        {!loading && (
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
             {updateForm()}
-            {successMessage()}
-            {warningMessage()}
             {goBack()}
         </div>
-        </div>
+        </div>)}
         </div>
         </Base>
     )

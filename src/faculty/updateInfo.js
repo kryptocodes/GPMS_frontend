@@ -5,6 +5,7 @@ import { isAuthenticated } from '../auth/'
 import { UpdateInfo, getUser } from '../auth/update'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import LoadingScreen from '../Home/loadingScreen'
 
 const UpdateFacultyInfo = () => {
     
@@ -12,10 +13,11 @@ const UpdateFacultyInfo = () => {
         email:"",
         name:"",
         dept:"",
-        year:""
+        year:"",
+        loading:true
     })
 
-    const {email,name,dept,year} = values
+    const {email,name,dept,year,loading} = values
 
     const {user, token} = isAuthenticated()
 
@@ -36,7 +38,7 @@ const UpdateFacultyInfo = () => {
                 setValues({...values})
                 toast.error(data.error)
             } else{
-                setValues({...values,email,name,dept,year})
+                setValues({...values,email,name,dept,year,loading:false})
             }
         })
     }
@@ -109,12 +111,14 @@ const UpdateFacultyInfo = () => {
     return (
         <Base title="Profile" className="container">
         <ToastContainer position="top-center"/>
+        {loading && <LoadingScreen/>}
+        {!loading && (
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
             {updateForm()}
             {goBack()}
         </div>
-        </div>
+        </div>)}
         </Base>
     )
 }

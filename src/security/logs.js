@@ -3,12 +3,14 @@ import Base from '../Home/base'
 import { Link } from 'react-router-dom'
 import { getLogs, } from '../auth/pass' 
 import Empty from '../assets/empty.svg'
+import LoadingScreen from '../Home/loadingScreen'
 
 
 const ManageLogs = () => {
     
     const [values,setValues] = useState([])
 
+    const [loading,setLoading] = useState(true)
 
     const preload = () => {
         getLogs()
@@ -18,6 +20,7 @@ const ManageLogs = () => {
                 console.log(data.error)
             } else{
                 setValues(data)
+                setLoading(false)
             }
         })
         }
@@ -82,7 +85,12 @@ const ManageLogs = () => {
     return (
         <Base title="Gatepass logs">
         <div className="container p-2 mx-auto">
+        {loading && <LoadingScreen/>}
+        {!loading && (
+        <React.Fragment>
         {passinfo()}
+        </React.Fragment>
+        )}
         </div>
         </Base>
     )

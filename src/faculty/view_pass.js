@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 import { getFacultyPass,updateStatus } from '../auth/pass' 
 import { isAuthenticated } from '../auth'
 import Empty from '../assets/empty.svg'
+import LoadingScreen from '../Home/loadingScreen'
 
 
 const ViewPass = () => {
     
     const [values,setValues] = useState([])
 
+    const [loading,setLoading] = useState(true)
 
     const {user,token} = isAuthenticated()
 
@@ -20,6 +22,7 @@ const ViewPass = () => {
                 console.log(data.error)
             } else{
                 setValues(data)
+                setLoading(false)
             }
         })
         }
@@ -105,7 +108,11 @@ const ViewPass = () => {
     return (
         <Base title="Manage Pass">
         <div className="container p-2 mx-auto">
+        {loading && <LoadingScreen/>}
+        {!loading && (
+        <React.Fragment>
         {passinfo()}
+        </React.Fragment>)}
         </div>
         </Base>
     )
