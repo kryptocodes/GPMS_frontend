@@ -73,6 +73,7 @@ const ApplyPass = () => {
                 onChange={handleChange("exp_dep_time")}
                 required
                 value={exp_dep_time}
+                placeholder="hh:mm"
                 />
             </div>
             <div className="col-md-5">
@@ -82,6 +83,7 @@ const ApplyPass = () => {
                     onChange={handleChange("exp_arr_time")}
                     required
                     value={exp_arr_time}
+                    placeholder="hh:mm"
                 />
             </div>
             </div>
@@ -96,6 +98,7 @@ const ApplyPass = () => {
                 onChange={handleChange("from_date")}
                 required
                 value={from_date}
+                placeholder="dd-mm-yyyy"
                 />
             </div>
             <div className="col-md-6">
@@ -105,6 +108,7 @@ const ApplyPass = () => {
                     onChange={handleChange("to_date")}
                     required
                     value={to_date}
+                    placeholder="dd-mm-yyyy"
                 />
             </div>
                 </div>
@@ -116,7 +120,7 @@ const ApplyPass = () => {
                     className="form-control my-3"
                     onChange={handleChange("reason")}
                     required
-                    placeholder="Please Leave me I wanna go home"
+                    placeholder="Valid Reason"
                     value={reason}
                 />
                 </div>

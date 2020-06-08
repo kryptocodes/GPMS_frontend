@@ -91,6 +91,7 @@ const Signin = () => {
                 placeholder="Enter your password"
                 className="form-control"
                 type="password"
+                autoComplete="password"
               />
             </div>
             <p className="lead">Having trouble logging in ?</p>
@@ -118,7 +119,7 @@ const Signin = () => {
   return (
       <div> 
       <div className="jumbotron-fluid bg-info">
-      <h1 className="display-3 text-white text-center p-4">GPMS</h1>
+      <h1 className="display-3 text-white text-center p-2">GPMS</h1>
       </div>
       <div className="container p-4 mx-auto">
       <div className="row py-4 my-4 offset-md-2">

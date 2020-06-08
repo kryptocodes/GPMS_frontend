@@ -1,14 +1,17 @@
 import React,{useState,useEffect} from 'react'
 import Base from '../Home/base'
 import { Link } from 'react-router-dom'
-import { getUserPass,deletePass } from '../auth/pass' 
+import { getUserPass } from '../auth/pass' 
 import { isAuthenticated } from '../auth'
 import Empty from '../assets/empty.svg'
+import LoadingScreen from '../Home/loadingScreen'
 
 
 const ManagePass = () => {
     
     const [values,setValues] = useState([])
+
+    const [loading,setLoading] = useState(true)
 
     const {user,token} = isAuthenticated()
 
@@ -20,6 +23,7 @@ const ManagePass = () => {
                 console.log(data.error)
             } else{
                 setValues(data)
+                setLoading(false)
             }
         })
         }
@@ -27,18 +31,6 @@ const ManagePass = () => {
     useEffect(() => {
         preload()
     },[])
-
-    const onSumbit = (passId) => {
-        deletePass(user._id,token,passId)
-        .then(data => {
-            if(data.error){
-                console.log(data.error)
-            } else{
-                preload();
-            }
-        })
-
-    }
 
     const goBack = () => {
         return(
@@ -51,7 +43,6 @@ const ManagePass = () => {
     const passinfo = () => (
         <React.Fragment>
         {goBack()}
-        <h1 className="text-center">Displaying {values.length} records</h1>
         {(values.length === 0) &&
         (<img src={Empty} className="rounded d-block mx-auto w-75" 
          alt="empty"/>)
@@ -91,13 +82,14 @@ const ManagePass = () => {
         </li>
        
         {(pass.status === "Approved") && (
-            <Link className="btn p-2 btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>Generate QR</Link>
+            <Link className="btn p-2 btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>
+            <button className="btn btn-warning">Generate QR</button>
+            </Link>
         )}
-        {(pass.status === "Under Process") && ( <React.Fragment>
-            <Link className="btn p-1 btn-warning mr-2"  to={`/student/pass/editpass/${pass._id}`}>Edit</Link>
-        <button onClick={() => {
-            onSumbit(pass._id)}} className="btn btn-sm p-1 btn-danger">Delete</button>
-        </React.Fragment>   
+        {(pass.status === "Under Process") && (
+            <Link className="btn p-1 btn-warning mr-2"  to={`/student/pass/editpass/${pass._id}`}>
+            <button className="btn p-2 btn-warning">Edit</button>
+            </Link> 
         )}
         </div>
         </div>
@@ -110,7 +102,11 @@ const ManagePass = () => {
     return (
         <Base title="Manage Pass">
         <div className="container p-2 mx-auto">
-        {passinfo()}
+        {loading && <LoadingScreen/>}
+        {!loading && (
+        <React.Fragment> 
+        {passinfo()} 
+        </React.Fragment>)}
         </div>
         </Base>
     )

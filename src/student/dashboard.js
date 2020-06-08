@@ -3,7 +3,7 @@ import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 import Base from '../Home/base'
 import { getUser } from '../auth/update'
-
+import LoadingScreen from '../Home/loadingScreen'
 
 const Dashboard = () => {
 
@@ -15,10 +15,11 @@ const Dashboard = () => {
         dept:"",
         year:"",
         mobile_no:"",
-        address:""
+        address:"",
+        loading:true
     })
 
-    const {email,name,roll_no,room_no,dept,year,mobile_no,address} = values;
+    const {email,name,roll_no,room_no,dept,year,mobile_no,address,loading} = values;
     
     const {user} = isAuthenticated()
 
@@ -29,7 +30,7 @@ const Dashboard = () => {
             if(data.error){
                 setValues({...values,error:data.error})
             } else{
-                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address})
+                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address,loading:false})
             }
         })
     }
@@ -106,8 +107,11 @@ const Dashboard = () => {
     )}
 
     return (
+       
         <Base title="Student Dashboard">
         <div className="container p-2">
+        {loading && <LoadingScreen/>}
+            {!loading && (
             <div className="row m-0">
                 <div className="col-md-3 p-2 mx-auto">
                 {student()}
@@ -115,7 +119,7 @@ const Dashboard = () => {
                 <div className="col-md-9 p-2 mx-auto">
                 {info()}
                 </div>
-            </div>
+            </div>)}
         </div>
         </Base>
     )
