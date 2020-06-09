@@ -111,7 +111,7 @@ const UpdateFacultyInfo = () => {
     return (
         <Base title="Profile" className="container">
         <ToastContainer position="top-center"/>
-        {loading && <LoadingScreen/>}
+        {loading && LoadingScreen()}
         {!loading && (
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">

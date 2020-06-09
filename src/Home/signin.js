@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { signin ,authenticate , isAuthenticated } from "../auth/index"
 import logo from '../assets/logo.png'
+import 'antd/dist/antd.css'
+import { Form, Input, Button, Checkbox } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 const Signin = () => {
+
   const [values , setValues] = useState({
     email: "",
     password: "",
@@ -19,8 +23,7 @@ const Signin = () => {
     setValues({...values,error: false, [name]: event.target.value})
   }
 
-  const onSubmit = event => {
-    event.preventDefault()
+  const onSubmit = values => {
     setValues({ ...values,buttonText:"Logging in",error: false, loading: true})
     signin({email,password})
       .then(data => {
@@ -37,6 +40,10 @@ const Signin = () => {
         }
       })
       .catch(console.log("sigin request failed"))
+  }
+
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
   }
 
   //to perform redirect to dashboard
@@ -68,8 +75,61 @@ const Signin = () => {
 
   const signInForm = () => {
     return (
+       <Form
+        className="login-form"
+        layout="vertical"
+        name="login-form"
+        initialValues={{ remember: true }}
+        onFinish={onSubmit}
+        onFinishFailed={onFinishFailed}
+      >
+      {errorMessage()}
+        <Form.Item
+          name="username"
+          label="Username"
+          rules={[{ required: true, message: 'Please input your username!' }]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Username"
+            onChange={handleChange("email")}
+            value={email}
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[{ required: true, message: 'Please input your Password!' }]}
+        >
+          <Input.Password
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+            onChange={handleChange("password")}
+            value={password}
+          />
+        </Form.Item>
+        <Form.Item>
+        <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+        <a className="login-form-forgot"  href="">
+          Forgot password
+        </a>
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="btn-block login-form-button"
+          >
+            Log in
+          </Button>
+        </Form.Item>
+      </Form>
+      
       //signin form 
-      <div className="row m-0">
+      /*<div className="row m-0">
         <div className="col-md-7 text-left">
           {errorMessage()} 
           <form>
@@ -112,28 +172,23 @@ const Signin = () => {
             </div>
           </form>
         </div>
-      </div>
-    );
+      </div>*/
+    )
   }
 
   return (
-      <div> 
-      <div className="jumbotron-fluid bg-info">
-      <h1 className="display-3 text-white text-center p-2">GPMS</h1>
-      </div>
-      <div className="container p-4 mx-auto">
-      <div className="row py-4 my-4 offset-md-2">
-      <div className="col-md-4 mt-5">
+      <div className="container">
+      <div className="row offset-md-2">
+      <div className="col-md-4 rounded pt-5 mt-3">
       <a href="https://amrita.edu.in">
       <img src={logo} 
           className="w-100"
           alt="Amrita logo"/>
       </a>
       </div>
-      <div className="col-md-8">
+      <div className="col-md-6 col-lg-5" >
       {signInForm()}
       {performRedirect()}
-      </div>
       </div>
       </div>
       </div>

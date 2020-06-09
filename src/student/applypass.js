@@ -5,9 +5,12 @@ import { isAuthenticated } from '../auth/'
 import { createPass } from '../auth/pass'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useForm } from "react-hook-form"
 
 const ApplyPass = () => {
     
+    const { register,handleSubmit,errors } = useForm()
+
     const [values , setValues] = useState({
         info:"",
         dept:"",
@@ -37,8 +40,7 @@ const ApplyPass = () => {
         console.log(values)
       }
 
-      const onSubmit = event => {
-        event.preventDefault()
+      const onSubmit = () => {
         setValues({...values})
         createPass(_id,token,values)
         .then(data => {
@@ -59,6 +61,10 @@ const ApplyPass = () => {
         })
     }
 
+    const warning = () => (
+        <p className="text-danger text-center">This field is required</p>
+    )
+
     const HomePassForm = () => {
         return(
             <form>
@@ -72,9 +78,12 @@ const ApplyPass = () => {
                 className="form-control my-3"
                 onChange={handleChange("exp_dep_time")}
                 required
+                name="exp_dep_time"
                 value={exp_dep_time}
                 placeholder="hh:mm"
+                ref={register({required:true})}
                 />
+                 {errors.exp_dep_time && warning()}
             </div>
             <div className="col-md-5">
                 <p className="lead">Expected arrival time</p>
@@ -82,9 +91,12 @@ const ApplyPass = () => {
                     className="form-control my-3"
                     onChange={handleChange("exp_arr_time")}
                     required
+                    name="exp_arr_time"
                     value={exp_arr_time}
                     placeholder="hh:mm"
+                    ref={register({required:true})}
                 />
+                {errors.exp_arr_time && warning() }
             </div>
             </div>
             </div>
@@ -97,9 +109,12 @@ const ApplyPass = () => {
                 className="form-control my-3"
                 onChange={handleChange("from_date")}
                 required
+                name="from_date"
                 value={from_date}
                 placeholder="dd-mm-yyyy"
+                ref={register({required:true})}
                 />
+                {errors.from_date && <p>This field is required</p>}
             </div>
             <div className="col-md-6">
                 <p className="lead">To</p>
@@ -107,9 +122,12 @@ const ApplyPass = () => {
                     className="form-control my-3"
                     onChange={handleChange("to_date")}
                     required
+                    name="to_date"
                     value={to_date}
                     placeholder="dd-mm-yyyy"
+                    ref={register({required:true})}
                 />
+                {errors.to_date && <p>This field is required</p>}
             </div>
                 </div>
                 </div>
@@ -120,12 +138,15 @@ const ApplyPass = () => {
                     className="form-control my-3"
                     onChange={handleChange("reason")}
                     required
+                    name="reason"
                     placeholder="Valid Reason"
                     value={reason}
+                    ref={register({required:true})}
                 />
+                {errors.reason && <p>This field is required</p>}
                 </div>
             </div>
-            <button onClick={onSubmit} className="btn btn-block p-2 btn-outline-success">Apply</button>
+            <button onClick={handleSubmit(onSubmit)} className="btn btn-block p-2 btn-outline-success">Apply</button>
             </div>
             </form>
         )

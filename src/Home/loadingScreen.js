@@ -7,9 +7,9 @@ const LoadingScreen = () => {
                 <ReactLoading 
                     type={'cylon'} 
                     color={'#001529'} 
-                    height={'50%'} 
-                    width={'50%'}
-                    className="offset-4" />
+                    height={'10%'} 
+                    width={'25%'}
+                    className="mx-auto" />
                     <h1 className="loading-text text-center">Loading</h1>
          </div>
     )

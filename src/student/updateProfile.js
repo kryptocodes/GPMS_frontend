@@ -142,7 +142,7 @@ const UpdateProfile = () => {
         <Base title="Profile">
         <ToastContainer position="top-center"/>
         <div className="container">
-        {loading && <LoadingScreen/>}
+        {loading && LoadingScreen()}
         {!loading && (
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">

@@ -7,7 +7,7 @@ const SecurityRoute = ({ component: Component, ...rest }) => {
       <Route
         {...rest}
         render={props =>
-            isAuthenticated() ? (
+            (isAuthenticated() && isAuthenticated().user.role == 2) ? (
                 <Component {...props} />
             ) : (
             <Redirect

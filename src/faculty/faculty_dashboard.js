@@ -95,7 +95,7 @@ const FacultyDashboard = () => {
 
     return (
         <Base title="Faculty Dashboard" className="container p-2">
-            {loading && <LoadingScreen/>}
+            {loading && LoadingScreen()}
             {!loading &&  (
             <div className="row m-0">
                 <div className="col-md-3 p-2 mx-auto">

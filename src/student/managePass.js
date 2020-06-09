@@ -102,7 +102,7 @@ const ManagePass = () => {
     return (
         <Base title="Manage Pass">
         <div className="container p-2 mx-auto">
-        {loading && <LoadingScreen/>}
+        {loading && LoadingScreen()}
         {!loading && (
         <React.Fragment> 
         {passinfo()} 
