@@ -9,7 +9,7 @@ const Base = ({
 }) => {
     return (
         <div>
-        <Nav/>
+            <Nav/>
             <div className="jumbotron-fluid bg-info text-center">
                  <h2 className="display-3 text-white text-center p-4">{title}</h2>
                   <p className="lead">{description}</p>

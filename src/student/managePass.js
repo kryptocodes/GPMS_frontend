@@ -5,7 +5,9 @@ import { getUserPass } from '../auth/pass'
 import { isAuthenticated } from '../auth'
 import Empty from '../assets/empty.svg'
 import LoadingScreen from '../Home/loadingScreen'
-
+import 'antd/dist/antd.css'
+import { Modal } from 'antd'
+import QR_code from './qrcode'
 
 const ManagePass = () => {
     
@@ -39,6 +41,17 @@ const ManagePass = () => {
         </div>
     )}
 
+    const qrcode = (passId) => {
+        console.log(passId)
+        Modal.confirm({
+            title: "Pass",
+            content: (
+                <div>
+                {QR_code(passId)}
+                </div>
+            ),
+          })
+    }
 
     const passinfo = () => (
         <React.Fragment>
@@ -82,13 +95,16 @@ const ManagePass = () => {
         </li>
        
         {(pass.status === "Approved") && (
-            <Link className="btn p-2 btn-warning mr-2" to={`/student/pass/qrcode/${pass._id}`}>
-            <button className="btn btn-warning">Generate QR</button>
-            </Link>
+            <button 
+                className="btn btn-warning"
+                onClick={() => {qrcode(pass._id)}} >
+                Generate QR
+            </button>
         )}
         {(pass.status === "Under Process") && (
             <Link className="btn p-1 btn-warning mr-2"  to={`/student/pass/editpass/${pass._id}`}>
-            <button className="btn p-2 btn-warning">Edit</button>
+            <button 
+                className="btn p-2 btn-warning">Edit</button>
             </Link> 
         )}
         </div>
@@ -102,8 +118,7 @@ const ManagePass = () => {
     return (
         <Base title="Manage Pass">
         <div className="container p-2 mx-auto">
-        {loading && LoadingScreen()}
-        {!loading && (
+        {loading ? LoadingScreen() : (
         <React.Fragment> 
         {passinfo()} 
         </React.Fragment>)}

@@ -6,6 +6,9 @@ import { createPass } from '../auth/pass'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useForm } from "react-hook-form"
+import 'antd/dist/antd.css'
+import { Result, Button } from 'antd'
+import Password from 'antd/lib/input/Password'
 
 const ApplyPass = () => {
     
@@ -19,10 +22,11 @@ const ApplyPass = () => {
         exp_arr_time:"",
         from_date:"",
         to_date:"",
-        reason:""
+        reason:"",
+        successMessage:false
     })
 
-    const {exp_dep_time,exp_arr_time,from_date,to_date,reason} = values
+    const {exp_dep_time,exp_arr_time,from_date,to_date,reason,successMessage} = values
 
 
 
@@ -54,15 +58,27 @@ const ApplyPass = () => {
                     exp_arr_time:"",
                     from_date:"",
                     to_date:"",
-                    reason:""
+                    reason:"",
+                    successMessage:true
                 })
-                toast.success("Applied Successfully")
             }
         })
     }
 
     const warning = () => (
         <p className="text-danger text-center">This field is required</p>
+    )
+
+    const Success = () => (
+        <Result
+    status="success"
+    title="Successfully Applied" 
+    extra={[
+      <Link to="/student/dashboard"><Button type="primary">
+        Go Dashboard
+      </Button></Link>,
+      <Link to="/student/viewpass"><Button>Manage Pass</Button></Link>,
+    ]}/>
     )
 
     const HomePassForm = () => {
@@ -155,12 +171,13 @@ const ApplyPass = () => {
     return (
         <Base title="Home Pass" className="container">
         <ToastContainer position="top-center"/>
+        {successMessage ? Success() : (
         <div className="row bg-white rounded">
         <div className="container col-md-8 offset-md-2">
             {HomePassForm()}
             {goBack()}
         </div>
-        </div>
+        </div>)}
         </Base>
     )
 }

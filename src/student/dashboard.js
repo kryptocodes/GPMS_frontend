@@ -5,7 +5,9 @@ import Base from '../Home/base'
 import { getUser } from '../auth/update'
 import LoadingScreen from '../Home/loadingScreen'
 
+
 const Dashboard = () => {
+
 
     const [values,setValues]=useState({
         email:"",
@@ -107,7 +109,6 @@ const Dashboard = () => {
     )}
 
     return (
-       
         <Base title="Student Dashboard">
         <div className="container p-2">
         {loading && LoadingScreen()}
