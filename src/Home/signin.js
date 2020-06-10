@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { signin ,authenticate , isAuthenticated } from "../auth/index"
 import logo from '../assets/logo.png'
 import 'antd/dist/antd.css'
-import { Form, Input, Button, Checkbox } from 'antd'
+import { Form, Input, Button, Checkbox, Card } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 const Signin = () => {
@@ -177,8 +177,10 @@ const Signin = () => {
   }
 
   return (
-      <div className="container">
-      <div className="row offset-md-2">
+      
+      <div className="container p-3">
+      <Card>
+      <div className="row offset-md-2 ">
       <div className="col-md-4 rounded pt-5 mt-3">
       <a href="https://amrita.edu.in">
       <img src={logo} 
@@ -191,6 +193,7 @@ const Signin = () => {
       {performRedirect()}
       </div>
       </div>
+      </Card>
       </div>
   )
 }

@@ -5,12 +5,16 @@ import Base from '../Home/base'
 import { getUser } from '../auth/update'
 import LoadingScreen from '../Home/loadingScreen'
 
+//ant component
+import 'antd/dist/antd.css'
+import { Card, Descriptions } from 'antd'
+
+
 
 const Dashboard = () => {
 
 
     const [values,setValues]=useState({
-        email:"",
         name:"",
         roll_no:"",
         room_no:"",
@@ -21,18 +25,18 @@ const Dashboard = () => {
         loading:true
     })
 
-    const {email,name,roll_no,room_no,dept,year,mobile_no,address,loading} = values;
+    const {name,roll_no,room_no,dept,year,mobile_no,address,loading} = values;
     
     const {user} = isAuthenticated()
 
     const preload = () => {
         getUser(user._id)
         .then(data => {
-            const {email,roll_no,name,room_no,dept,year,mobile_no,address} = data;
+            const {roll_no,name,room_no,dept,year,mobile_no,address} = data;
             if(data.error){
                 setValues({...values,error:data.error})
             } else{
-                setValues({...values,email,roll_no,name,room_no,dept,year,mobile_no,address,loading:false})
+                setValues({...values,roll_no,name,room_no,dept,year,mobile_no,address,loading:false})
             }
         })
     }
@@ -44,68 +48,46 @@ const Dashboard = () => {
 
     const student = () => {
         return (
-            <div className="card">
+            <Card hoverable>
                 <h4 className="card-header bg-dark text-white">Student</h4>
                 <ul className="list-group">
-                    <li className="list-group-item">
+                    <Card hoverable>
                         <Link to="/student/gatepass" className="nav-link text-info">Apply Home Pass</Link>
-                    </li>
-                    <li className="list-group-item">
+                    </Card>
+                    <Card hoverable>
                         <Link to="/student/outpass" className="nav-link text-info">Apply Out Pass</Link>
-                    </li>
-                    <li className="list-group-item">
+                    </Card>
+                    <Card hoverable>
                     <Link to="/student/viewpass" className="nav-link text-info">View Pass Status</Link>
-                    </li>
+                    </Card>
+                    <Card hoverable>
+                    <Link to="/student/updatepassword" className="nav-link text-info">Update Password</Link>
+                    </Card>
                 </ul>
-            </div>
+            </Card>
         )
     }
 
     const info = () => {
         return(
-        <div className="card mb-4">
-                <div className="card-header bg-secondary d-flex bd-highlight">
-                <h4 className=" text-white flex-grow-1 bd-highlight">Student Information</h4>
-                <Link 
-                    className="btn mr-1 text-center btn-info"
-                    to="/student/updatepassword"
+                <Card 
+                    title="Student Information"
+                    hoverable
+                    extra={<Link to="/student/updateprofile">Update Profile</Link>}
                     >
-                    Change Password
-                </Link>
-                <Link 
-                className="btn text-center btn-info"
-                to="/student/updateprofile"
-                >
-                Edit
-            </Link>
-                </div>
-                <ul className="list-group">
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Name:</span>{name}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Email:</span>{email}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Roll No:</span>{roll_no}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Room No:</span>{room_no}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Year:</span>{year}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Dept:</span>{dept}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Mobile No:</span>{mobile_no}
-                    </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-info mr-2">Address:</span>{address}
-                    </li>                    
-                </ul>
-            </div>
+                <Descriptions
+                    bordered
+                    column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}>
+                    
+                <Descriptions.Item label="Name:">{name}</Descriptions.Item>
+                <Descriptions.Item label="Roll No:">{roll_no}</Descriptions.Item>
+                <Descriptions.Item label="Room No:">{room_no}</Descriptions.Item>
+                <Descriptions.Item label="Dept:">{dept}</Descriptions.Item>
+                <Descriptions.Item label="Year:">{year}</Descriptions.Item>
+                <Descriptions.Item label="Mobile No:">{mobile_no}</Descriptions.Item>
+                <Descriptions.Item label="Address:">{address}</Descriptions.Item>
+                </Descriptions>
+                </Card>
     )}
 
     return (

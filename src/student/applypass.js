@@ -6,9 +6,11 @@ import { createPass } from '../auth/pass'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useForm } from "react-hook-form"
+
+//ant components
 import 'antd/dist/antd.css'
 import { Result, Button } from 'antd'
-import Password from 'antd/lib/input/Password'
+
 
 const ApplyPass = () => {
     

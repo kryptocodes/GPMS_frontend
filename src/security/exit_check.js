@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
 import QrReader from 'react-qr-reader'
 import Base from '../Home/base'
-import { getPass, updatePost } from '../auth/pass'
+import { getPass } from '../auth/pass'
 import { isAuthenticated } from '../auth'
 import { Link } from'react-router-dom'
+import { exitCheck } from '../auth/gate'
 
 const Exit_check = () => {
 
@@ -56,7 +57,6 @@ const Exit_check = () => {
                     year:data.year,
                     place:data.info.address
                 })
-                console.log(values)
                 Exit(data._id)
             }
         })
@@ -64,8 +64,8 @@ const Exit_check = () => {
     }
     }
 
-    const Exit = (passId) => {
-        updatePost(user._id,token,passId,{exit:exit})
+    const Exit = async (passId) => {
+        await exitCheck(user._id,token,passId,{exit:exit})
         .then(data => {
           if(data.error){
               console.log(data.error)

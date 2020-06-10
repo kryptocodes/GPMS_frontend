@@ -69,8 +69,8 @@ const ManageLogs = () => {
                     <td>{pass.year}</td>
                     <td>{pass.info.address}</td>
                     <td>{pass.pass_type}</td>
-                    <td>{pass.entry}</td>
                     <td>{pass.exit}</td>
+                    <td>{pass.entry}</td>
                     
                 </tr>
             </tbody>
@@ -85,12 +85,9 @@ const ManageLogs = () => {
     return (
         <Base title="Gatepass logs">
         <div className="container p-2 mx-auto">
-        {loading && LoadingScreen()}
-        {!loading && (
-        <React.Fragment>
-        {passinfo()}
-        </React.Fragment>
-        )}
+        {loading ? LoadingScreen() :
+          passinfo()
+        }
         </div>
         </Base>
     )
