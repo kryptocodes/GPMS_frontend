@@ -19,6 +19,8 @@ import SecurityDashboard from './security/security_dashboard'
 import Entry_check from './security/entry_check'
 import Exit_check from './security/exit_check'
 import ManageLogs from './security/logs'
+import WardenRoute from './auth/warden'
+import WardenDashboard from './warden/dashboard'
 
 export default function Routes() {
     return (
@@ -44,6 +46,8 @@ export default function Routes() {
                     <SecurityRoute path="/security/entry" exact component={Entry_check}/>
                     <SecurityRoute path="/security/exit" exact component={Exit_check}/>
                     <SecurityRoute path="/security/logs" exact component={ManageLogs}/>
+
+                    <WardenRoute path="/warden/dashboard" exact component={WardenDashboard}/>
 
                 </Switch>
             </BrowserRouter>

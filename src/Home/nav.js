@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, withRouter} from "react-router-dom"
+import {withRouter} from "react-router-dom"
 import {signout , isAuthenticated } from '../auth'
 
 
@@ -10,7 +10,7 @@ const Nav = ({history}) => (
         <ul className="nav navbar-nav">
             {isAuthenticated() && (
                 <li className="nav-item">
-                <Link
+                <a
                 className="nav-link text-warning"
                 onClick={() => {
                     signout(() => {
@@ -19,7 +19,7 @@ const Nav = ({history}) => (
                 }}
                 >
                     Signout
-                </Link>
+                </a>
             </li>
             )}
              
