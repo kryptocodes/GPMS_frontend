@@ -7,7 +7,7 @@ const WardenRoute = ({ component: Component, ...rest }) => {
       <Route
         {...rest}
         render={props =>
-            (isAuthenticated() && isAuthenticated().user.role == 4)  ? (
+            (isAuthenticated() && isAuthenticated().user.role === 4)  ? (
                 <Component {...props} />
             ) : (
             <Redirect

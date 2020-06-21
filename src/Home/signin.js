@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { signin ,authenticate , isAuthenticated } from "../auth/index"
 import logo from '../assets/logo.png'
@@ -9,14 +9,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 const Signin = () => {
 
   const [values , setValues] = useState({
-    email: "",
-    password: "",
     error: "",
     buttonText:"Log in",
     didRedirect: false
   })
 
-  const { email,password,error,buttonText,didRedirect} = values;
+  const { email,password,error,didRedirect} = values;
   const { user } = isAuthenticated()
 
   const handleChange = name => event => {
@@ -24,27 +22,34 @@ const Signin = () => {
   }
 
   const onSubmit = values => {
-    setValues({ ...values,buttonText:"Logging in",error: false, loading: true})
-    signin({email,password})
+    setValues({ ...values,error: false, loading: true})
+    signin(values)
       .then(data => {
         if(data.error) {
-          setValues({ ...values,buttonText:"Log in",error:data.error, loading:false})
+          setValues({...values,error:data.error, loading:false})
+          console.log(values)
         } else{
           authenticate(data, () => {
             setValues({
               ...values,
-              buttonText:"Log in",
               didRedirect: true
             })
+            
           })
         }
       })
-      .catch(console.log("sigin request failed"))
   }
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   }
+
+
+  useEffect(() => {
+    if (isAuthenticated()){
+      setValues({didRedirect:true})
+    }
+  });
 
   //to perform redirect to dashboard
   const performRedirect = () => {
@@ -89,7 +94,7 @@ const Signin = () => {
       >
       {errorMessage()}
         <Form.Item
-          name="username"
+          name="email"
           label="Username"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
@@ -111,15 +116,13 @@ const Signin = () => {
             placeholder="Password"
             onChange={handleChange("password")}
             value={password}
+            
           />
         </Form.Item>
         <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-        <a className="login-form-forgot"  href="">
-          Forgot password
-        </a>
         </Form.Item>
         <Form.Item>
           <Button

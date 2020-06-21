@@ -60,12 +60,8 @@ const Attenlog = () => {
                     <td>{atten.status}</td>
                 </tr>
                 </tbody>))}
-    
-            
             </table>
-            
         </div>
-        
         </React.Fragment>         
     )
 
