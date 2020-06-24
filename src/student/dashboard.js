@@ -48,7 +48,7 @@ const Dashboard = () => {
 
     const student = () => {
         return (
-            <Card hoverable>
+            <Card className="shadow rounded">
                 <h4 className="card-header bg-dark text-white">Student</h4>
                 <ul className="list-group">
                     <Card hoverable>
@@ -72,8 +72,8 @@ const Dashboard = () => {
         return(
                 <Card 
                     title="Student Information"
-                    hoverable
                     extra={<Link to="/student/updateprofile">Update Profile</Link>}
+                    className="shadow rounded"
                     >
                 <Descriptions
                     bordered

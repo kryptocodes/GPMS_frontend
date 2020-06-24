@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import Base from '../Home/base'
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
 import { createPass } from '../auth/pass'
 import { ToastContainer, toast } from 'react-toastify'
@@ -36,7 +36,7 @@ const ApplyPass = () => {
 
     const goBack = () => {
         return(
-        <div className="ml-3">
+        <div className="ml-2">
         <Link className="btn btn-lg btn-warning mb-4" to="/dashboard">Back</Link>
         </div>
     )}
@@ -86,7 +86,7 @@ const ApplyPass = () => {
     const HomePassForm = () => {
         return(
             <form>
-            <div className="form-group jumbotron bg-white">
+            <div className="form-group jumbotron bg-white shadow rounded">
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Time</p>
             <div className="row mx-auto p-2">
@@ -132,7 +132,7 @@ const ApplyPass = () => {
                 placeholder="dd-mm-yyyy"
                 ref={register({required:true})}
                 />
-                {errors.from_date && <p>This field is required</p>}
+                {errors.from_date && warning()}
             </div>
             <div className="col-md-6">
                 <p className="lead">To</p>
@@ -145,7 +145,7 @@ const ApplyPass = () => {
                     placeholder="dd-mm-yyyy"
                     ref={register({required:true})}
                 />
-                {errors.to_date && <p>This field is required</p>}
+                {errors.to_date && warning()}
             </div>
                 </div>
                 </div>
@@ -161,7 +161,7 @@ const ApplyPass = () => {
                     value={reason}
                     ref={register({required:true})}
                 />
-                {errors.reason && <p>This field is required</p>}
+                {errors.reason && warning()}
                 </div>
             </div>
             <button onClick={handleSubmit(onSubmit)} className="btn btn-block p-2 btn-outline-success">Apply</button>

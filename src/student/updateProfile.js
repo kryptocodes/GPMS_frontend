@@ -74,8 +74,8 @@ const UpdateProfile = () => {
 
     const updateForm = () => {
         return(
-            <form>
-            <div className="form-group">
+            <form className="card shadow rounded">
+            <div className="form-group p-4">
             <p className="lead">Email Id</p>
             <input type="text"
                 className="form-control my-3"
@@ -131,9 +131,10 @@ const UpdateProfile = () => {
                     required
                     value={address}
                 />
+                <button onClick={onSubmit} className="btn btn-block btn-outline-success">Update profile</button>
             </div>
             
-            <button onClick={onSubmit} className="btn btn-outline-success">Update profile</button>
+            
             </form>
         )
     }

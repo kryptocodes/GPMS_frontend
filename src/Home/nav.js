@@ -6,7 +6,7 @@ import {signout , isAuthenticated } from '../auth'
 const Nav = ({history}) => (
     <div>
         <nav className="navbar navbar-light bg-dark">
-        <span className="text-white display-4">GPMS</span>
+        <span className="text-white" style={{fontSize:"2rem"}}>GPMS</span>
         <ul className="nav navbar-nav">
             {isAuthenticated() && (
                 <li className="nav-item">

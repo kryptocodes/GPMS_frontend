@@ -63,8 +63,8 @@ const UpdatePassword = () => {
 
     const updateForm = () => {
         return(
-            <form>
-            <div className="form-group">
+            <form className="card shadow rounded-lg">
+            <div className="form-group p-4">
             <p className="lead">Enter new password</p>
             <input type="password"
                 className="form-control my-3"
@@ -74,8 +74,9 @@ const UpdatePassword = () => {
                 required
                 placeholder="enter"
                 />
+            <button onClick={onSubmit} className="btn btn-block btn-outline-success">Update password</button>
             </div>
-            <button onClick={onSubmit} className="btn btn-outline-success">Update password</button>
+            
             </form>
         )
     }
