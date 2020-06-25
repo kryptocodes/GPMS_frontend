@@ -69,7 +69,7 @@ const EditPass = ({match}) => {
 
     const goBack = () => {
         return(
-            <div className="mr-2 ml-3">
+            <div className="mb-4">
             <Link className="btn btn-lg btn-warning" to="/student/viewpass">Back</Link>
             </div>
         )
@@ -79,7 +79,7 @@ const EditPass = ({match}) => {
     const PassForm = () => {
         return(
             <form>
-            <div className="form-group jumbotron bg-white">
+            <div className="form-group jumbotron bg-white shadow rounded">
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Time</p>
             <div className="row mx-auto p-2">
@@ -144,8 +144,12 @@ const EditPass = ({match}) => {
     return (
         <Base title="Edit Pass" className="container">
         <ToastContainer position="top-center"/>
+        <div className="row bg-white rounded">
+        <div className="col-md-8 offset-md-2">
         {goBack()}
         {PassForm()}
+        </div>
+        </div>
         </Base>
     )
 }
