@@ -23,6 +23,7 @@ import WardenRoute from './auth/warden'
 import WardenDashboard from './warden/dashboard'
 import Attend from './warden/attend'
 import Atten from './warden/attenLog'
+import StudInfo from './warden/StudInfo'
 
 export default function Routes() {
     return (
@@ -52,6 +53,7 @@ export default function Routes() {
                     <WardenRoute path="/warden/dashboard" exact component={WardenDashboard}/>
                     <WardenRoute path="/warden/attendance" exact component={Attend}/>
                     <WardenRoute path="/warden/log" exact component={Atten}/>
+                    <WardenRoute path="/warden/studentinfo" exact component={StudInfo}/>
 
                 </Switch>
             </BrowserRouter>

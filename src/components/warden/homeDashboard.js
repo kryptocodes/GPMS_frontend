@@ -46,7 +46,7 @@ const HomeDashboard = () => {
         src="https://i7.uihere.com/icons/251/857/218/user-info-dc772ffbb3eeb53b4008d7b949983dae.png"
         className="p-4 mx-auto"
         />}>
-        <p className="lead text-center">Student Info</p>
+        <Link to="/warden/studentinfo"><p className="lead text-center">Student Info</p></Link>
     </Card>
         </div>
         </div>
