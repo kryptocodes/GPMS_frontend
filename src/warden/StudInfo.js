@@ -15,7 +15,7 @@ const StudInfo = () => {
     return (
         <Base 
             title="Student Info"
-            className="container p-4">
+            className="p-4">
             {goBack()}
             {StudentInfo()}
         </Base>

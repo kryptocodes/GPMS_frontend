@@ -14,7 +14,6 @@ const StudentInfo = () => {
     const Student = () => {
         getStudent()
         .then(data => {
-            console.log(data)
             if(data.error){
                 console.log(data.error)
             } else{
@@ -31,13 +30,12 @@ const StudentInfo = () => {
         {
             title: 'S.No',
             width: 5,
-            dataIndex: 'SNO',
-            key: 'SNO'
+            dataIndex: 'key',
+            key: 'key'
         },
         {
             title: 'Name',
             width: 100,
-            fixed: 'left',
             dataIndex: 'name',
             key: 'name'
         },
@@ -62,7 +60,7 @@ const StudentInfo = () => {
     ]
 
     const data = values.map((student,index) => ({
-        SNO: index+1,
+        key: index+1,
         name: student.name,
         dept: student.dept,
         year: student.year,

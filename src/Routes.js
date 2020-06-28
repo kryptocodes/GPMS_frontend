@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter,Switch,Route} from "react-router-dom"
+import { BrowserRouter , Switch , Route } from "react-router-dom"
 import Home from './Home/home'
 import Dashboard from './student/dashboard'
 import FacultyDashboard from './faculty/faculty_dashboard'
