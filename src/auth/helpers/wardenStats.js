@@ -42,3 +42,18 @@ export const getAttendance = () =>{
     })
     .catch(err => console.log(err))
 }
+
+export const Managepass = (userId,token) => {
+    return fetch(`${API}/pass/warden/${userId}`,{
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}

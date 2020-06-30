@@ -2,8 +2,8 @@ import React from 'react'
 import 'antd/dist/antd.css'
 import { Card } from 'antd'
 import { Link } from 'react-router-dom'
-import AttendancePNG  from '../../assets/attendance.png'
-
+import AttendancePNG  from '../../assets/Warden/attendance.png'
+import ManagePassPNG from '../../assets/Warden/managePass.png'
 
 
 const HomeDashboard = () => {
@@ -33,10 +33,10 @@ const HomeDashboard = () => {
         <Card 
             hoverable
             cover={<img alt="image" 
-            src="https://www.dlf.pt/png/big/14/143193_register-icon-png.png"
-            className="p-4 mx-auto"
+            src={ManagePassPNG}
+            className="p-4 mx-auto w-75"
             />}>
-            <p className="lead text-center">Manage Pass</p>
+            <Link to="/warden/managepass"><p className="lead text-center">Manage Pass</p></Link>
         </Card>
         </div>
         <div className="col-md-3 p-2">
