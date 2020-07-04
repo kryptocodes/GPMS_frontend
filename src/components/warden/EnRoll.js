@@ -2,13 +2,11 @@ import React from 'react'
 
 //antd components
 import 'antd/dist/antd.css'
-import { Form, Input, InputNumber, Button } from 'antd'
+import { Form, Input, Select, Button } from 'antd'
+
+const { Option } = Select
 
 const EnRoll = () => {
-
-    const onSubmit = values => {
-
-    }
 
     const stud = () => {
         return (
@@ -43,7 +41,7 @@ const EnRoll = () => {
                 ]}>
                     <Input/>
             </Form.Item>
-             <Form.Item label="Dept">
+             <Form.Item label="Dept" required>
                 <Form.Item 
                     name="dept"
                     noStyle
@@ -69,7 +67,7 @@ const EnRoll = () => {
                             required:true
                         }
                     ]}>
-                        <Input/>
+                        <Input.TextArea/>
                 </Form.Item>
                  <Form.Item
                     name="Mobile No"
@@ -77,7 +75,6 @@ const EnRoll = () => {
                     rules={[
                         {
                             type: 'number',
-                            len: '10',
                             required:true
                         }
                     ]}>
@@ -102,12 +99,17 @@ const EnRoll = () => {
                         <Input 
                         defaultValue="hello@123"/>
                 </Form.Item>
+                <Form.Item>
+                    <Button type="primary">
+                       Submit
+                     </Button>
+                 </Form.Item>
             </Form>
         )
     }
 
     return (
-        <div>
+        <div className="container p-5">
             {stud()}
         </div>
     )

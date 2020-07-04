@@ -25,6 +25,7 @@ import Attend from './warden/attend'
 import Atten from './warden/attenLog'
 import StudInfo from './warden/StudInfo'
 import ManagePaSS from './warden/ManagePaSS'
+import Enrollment from './warden/enrollment'
 
 export default function Routes() {
     return (
@@ -55,6 +56,7 @@ export default function Routes() {
                     <WardenRoute path="/warden/attendance" exact component={Attend}/>
                     <WardenRoute path="/warden/log" exact component={Atten}/>
                     <WardenRoute path="/warden/managepass" exact component={ManagePaSS}/>
+                    <WardenRoute path="/warden/enrollment" exact component={Enrollment}/>
                     <WardenRoute path="/warden/studentinfo" exact component={StudInfo}/>
 
                 </Switch>
