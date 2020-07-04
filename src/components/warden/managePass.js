@@ -86,7 +86,10 @@ const ManagePass = () => {
                 className="table-responsive"
                 columns={columns}
                 expandable={{
-                    expandedRowRender: record => <p className="mx-auto"><strong>Reason:</strong>{record.reason}</p>
+                    expandedRowRender: record => ( 
+                        <p className="mx-auto">
+                            <strong className="p-2">Reason:</strong>{record.reason}
+                        </p>)
                 }} 
                 dataSource={data} 
                 bordered 

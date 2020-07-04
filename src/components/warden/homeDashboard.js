@@ -1,9 +1,14 @@
 import React from 'react'
-import 'antd/dist/antd.css'
-import { Card } from 'antd'
 import { Link } from 'react-router-dom'
+
+//img
 import AttendancePNG  from '../../assets/Warden/attendance.png'
 import ManagePassPNG from '../../assets/Warden/managePass.png'
+
+//antd components
+import 'antd/dist/antd.css'
+import { Card } from 'antd'
+
 
 
 const HomeDashboard = () => {
