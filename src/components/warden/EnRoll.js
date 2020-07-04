@@ -1,19 +1,41 @@
 import React from 'react'
+import { createUser } from '../../auth/helpers/wardenStats'
 
 //antd components
 import 'antd/dist/antd.css'
 import { Form, Input, Select, Button } from 'antd'
 
+
 const { Option } = Select
 
 const EnRoll = () => {
 
+    const onSubmit = (values) => {
+        createUser(values)
+        .then(data =>{
+            if(data.error){
+                console.log(data.error)
+            } else{
+            console.log(data)
+            }
+        })
+    }
+
+    const onFinishFailed = errorInfo => {
+        console.log("Error",errorInfo)
+    } 
+
     const stud = () => {
         return (
-            <Form name="enrollment">
+            <Form 
+                name="enrollment"
+                layout="vertical"
+                onFinish={onSubmit}
+                onFinishFailed={onFinishFailed}
+                >
                 <Form.Item
                     name="Name"
-                    label="Name"
+                    label=""
                     rules={[
                         {
                             required:true
@@ -31,6 +53,24 @@ const EnRoll = () => {
                     ]}>
                         <Input/>
                 </Form.Item>
+                <Form.Item label="Year" required>
+                <Form.Item 
+                    name="year"
+                    noStyle
+                    rules={[
+                        {
+                            required: true
+                        }
+                    ]}>
+                    <Select placeholder="Select Year">
+                        <Option value="1">I</Option>
+                        <Option value="2">II</Option>
+                        <Option value="3">III</Option>
+                        <Option value="4">IV</Option>
+                    </Select>
+                </Form.Item>
+                </Form.Item>
+
                 <Form.Item
                 name="room_no"
                 label="Room No"
@@ -60,8 +100,8 @@ const EnRoll = () => {
                 </Form.Item>
                 </Form.Item>
                  <Form.Item
-                    name="Address"
-                    label="address"
+                    name="address"
+                    label="Address"
                     rules={[
                         {
                             required:true
@@ -70,37 +110,35 @@ const EnRoll = () => {
                         <Input.TextArea/>
                 </Form.Item>
                  <Form.Item
-                    name="Mobile No"
-                    label="mobile_no"
+                    name="mobile_no"
+                    label="Mobile No"
                     rules={[
                         {
-                            type: 'number',
                             required:true
                         }
                     ]}>
                         <Input/>
                 </Form.Item>
                  <Form.Item
-                    name="Roll No"
-                    label="roll_no"
+                    name="roll_no"
+                    label="Roll No"
                     rules={[
                         {
-                            type: 'number',
                             required:true
                         }
                     ]}>
                         <Input/>
                 </Form.Item>
                  <Form.Item
-                    name="Password"
-                    label="password"
-                    hidden="true"
+                    name="encry_password"
+                    label="Password"
+                    hidden={true}
                     >
                         <Input 
                         defaultValue="hello@123"/>
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary">
+                    <Button type="primary" htmlType="submit">
                        Submit
                      </Button>
                  </Form.Item>
@@ -109,8 +147,10 @@ const EnRoll = () => {
     }
 
     return (
-        <div className="container p-5">
+        <div className="p-5 row rounded">
+            <div className="col-md-6 mx-auto">
             {stud()}
+            </div>
         </div>
     )
 }

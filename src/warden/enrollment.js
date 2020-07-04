@@ -5,7 +5,7 @@ import EnRoll from '../components/warden/EnRoll'
 const Enrollment = () => {
     return (
         <Base title="Enrollment"
-               className="container shadow-lg">
+               className="container shadow-lg mt-5">
                {EnRoll()}
         </Base>
     )

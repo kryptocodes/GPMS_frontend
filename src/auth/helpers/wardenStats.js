@@ -57,3 +57,19 @@ export const Managepass = (userId,token) => {
     })
     .catch(err => console.log(err))
 }
+
+
+export const createUser = (values) => {
+    return fetch(`${API}/signup`,{
+        method:"POST",
+        headers:{
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
