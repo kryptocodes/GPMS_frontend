@@ -1,7 +1,6 @@
 import React,{ useState , useEffect } from 'react'
 
 //ant components
-import 'antd/dist/antd.css';
 import { Table } from 'antd';
 import { Managepass } from '../../auth/helpers/wardenStats';
 import { isAuthenticated } from '../../auth';

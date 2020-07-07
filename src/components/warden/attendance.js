@@ -1,6 +1,5 @@
 import React,{ useState, useEffect } from 'react'
 import { getStudent, addAtten } from '../../auth/helpers/wardenStats'
-import Base from '../../Home/base'
 import { isAuthenticated } from '../../auth'
 import LoadingScreen from '../../Home/loadingScreen'
 

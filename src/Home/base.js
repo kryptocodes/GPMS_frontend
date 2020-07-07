@@ -1,6 +1,6 @@
 import React from 'react'
 import Nav from './nav'
-
+import 'antd/dist/antd.css'
 
 const Base = ({
     title,

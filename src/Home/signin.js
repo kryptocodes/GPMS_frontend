@@ -2,7 +2,9 @@ import React, { useState,useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { signin ,authenticate , isAuthenticated } from "../auth/index"
 import logo from '../assets/logo.png'
-import 'antd/dist/antd.css'
+
+
+//antd components
 import { Form, Input, Button, Checkbox, Card } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 

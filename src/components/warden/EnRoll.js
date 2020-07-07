@@ -1,29 +1,44 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { createUser } from '../../auth/helpers/wardenStats'
+import { Link } from 'react-router-dom'
 
 //antd components
-import 'antd/dist/antd.css'
-import { Form, Input, Select, Button } from 'antd'
+import { Form, Input, Select, Button, Result } from 'antd'
+
 
 
 const { Option } = Select
 
 const EnRoll = () => {
 
+    const [Loading,setLoading] = useState(false)
+
     const onSubmit = (values) => {
-        createUser(values)
+        createUser({values,password:"hello@123"})
         .then(data =>{
             if(data.error){
                 console.log(data.error)
             } else{
             console.log(data)
+            setLoading(true)
             }
         })
     }
 
     const onFinishFailed = errorInfo => {
         console.log("Error",errorInfo)
-    } 
+    }
+
+    const Success = () => (
+        <Result
+    status="success"
+    title="Created User" 
+    extra={[
+      <Link to="/warden/dashboard"><Button type="primary">
+        Go Dashboard
+      </Button></Link>,
+    ]}/>
+    )
 
     const stud = () => {
         return (
@@ -34,8 +49,8 @@ const EnRoll = () => {
                 onFinishFailed={onFinishFailed}
                 >
                 <Form.Item
-                    name="Name"
-                    label=""
+                    name="name"
+                    label="Name"
                     rules={[
                         {
                             required:true
@@ -44,7 +59,7 @@ const EnRoll = () => {
                         <Input/>
                 </Form.Item>
                  <Form.Item
-                    name="Email"
+                    name="email"
                     label="Email"
                     rules={[
                         {
@@ -129,14 +144,6 @@ const EnRoll = () => {
                     ]}>
                         <Input/>
                 </Form.Item>
-                 <Form.Item
-                    name="encry_password"
-                    label="Password"
-                    hidden={true}
-                    >
-                        <Input 
-                        defaultValue="hello@123"/>
-                </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
                        Submit
@@ -149,7 +156,8 @@ const EnRoll = () => {
     return (
         <div className="p-5 row rounded">
             <div className="col-md-6 mx-auto">
-            {stud()}
+            {Loading ? Success() :
+            stud() }
             </div>
         </div>
     )

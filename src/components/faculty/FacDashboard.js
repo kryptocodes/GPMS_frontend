@@ -5,7 +5,6 @@ import { getUser } from '../../auth/update'
 import LoadingScreen from '../../Home/loadingScreen'
 
 //ant components
-import 'antd/dist/antd.css'
 import { Card, Descriptions } from 'antd'
 
 const FacDashboard = () => {
