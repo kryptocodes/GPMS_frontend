@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom'
 import { Form, Input, Select, Button, Result } from 'antd'
 
 
-
 const { Option } = Select
 
 const EnRoll = () => {
 
     const [Loading,setLoading] = useState(false)
-
+    
     const onSubmit = (values) => {
-        createUser({values,password:"hello@123"})
+        const {name,email,year,room_no,dept,address,mobile_no,roll_no} = values
+        const value = {name,email,year,room_no,dept,address,mobile_no,roll_no,password:"hello@123"}
+        createUser(value)
         .then(data =>{
             if(data.error){
                 console.log(data.error)
@@ -36,6 +37,9 @@ const EnRoll = () => {
     extra={[
       <Link to="/warden/dashboard"><Button type="primary">
         Go Dashboard
+      </Button></Link>,
+      <Link to="/warden/enrollment"><Button type="primary">
+        Create Another User
       </Button></Link>,
     ]}/>
     )
