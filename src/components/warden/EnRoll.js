@@ -11,6 +11,8 @@ const { Option } = Select
 const EnRoll = () => {
 
     const [Loading,setLoading] = useState(false)
+
+    const [error,setError] = useState('')
     
     const onSubmit = (values) => {
         const {name,email,year,room_no,dept,address,mobile_no,roll_no} = values
@@ -19,28 +21,40 @@ const EnRoll = () => {
         .then(data =>{
             if(data.error){
                 console.log(data.error)
+                setError(data.error)
             } else{
             console.log(data)
+            setError('')
             setLoading(true)
             }
         })
     }
 
+    const errorMessage = () => {
+        return ( 
+          <div className="justify-content-center alert alert-danger text-center" 
+                style={{display: error ? "" : "none"}}>
+          {error}
+          </div>
+        )
+      }
+    
+
     const onFinishFailed = errorInfo => {
         console.log("Error",errorInfo)
     }
 
-    const Success = () => (
+    const Success = (email) => (
         <Result
     status="success"
-    title="Created User" 
+    title="Created User"
     extra={[
       <Link to="/warden/dashboard"><Button type="primary">
         Go Dashboard
       </Button></Link>,
-      <Link to="/warden/enrollment"><Button type="primary">
+      <Button type="primary" className="mt-2" onClick={() => setLoading(false)}>
         Create Another User
-      </Button></Link>,
+      </Button>,
     ]}/>
     )
 
@@ -160,6 +174,7 @@ const EnRoll = () => {
     return (
         <div className="p-5 row rounded">
             <div className="col-md-6 mx-auto">
+            {errorMessage()}
             {Loading ? Success() :
             stud() }
             </div>

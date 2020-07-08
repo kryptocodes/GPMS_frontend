@@ -53,6 +53,16 @@ const HomeDashboard = () => {
         <Link to="/warden/studentinfo"><p className="lead text-center">Student Info</p></Link>
     </Card>
         </div>
+        <div className="col-md-3 p-2">
+        <Card 
+        hoverable
+        cover={<img alt="image" 
+        src="https://i7.uihere.com/icons/251/857/218/user-info-dc772ffbb3eeb53b4008d7b949983dae.png"
+        className="p-4 mx-auto"
+        />}>
+        <Link to="/warden/enrollment"><p className="lead text-center">Enrollment</p></Link>
+    </Card>
+        </div>
         </div>
     )
 }
