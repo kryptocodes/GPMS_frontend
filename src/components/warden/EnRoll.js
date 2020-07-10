@@ -172,8 +172,8 @@ const EnRoll = () => {
     }
 
     return (
-        <div className="p-5 row rounded">
-            <div className="col-md-6 mx-auto">
+        <div className="mx-auto row rounded">
+            <div className="col-md-5 mx-auto">
             {errorMessage()}
             {Loading ? Success() :
             stud() }

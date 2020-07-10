@@ -12,7 +12,7 @@ import { Card } from 'antd'
 
 const HomeDashboard = () => {
     return (
-        <div className="row mx-auto container">
+        <div className="row m-0 p-3 container">
         <div className="col-md-3 p-2">
         <Card 
             hoverable
