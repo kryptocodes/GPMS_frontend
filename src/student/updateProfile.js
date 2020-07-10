@@ -48,7 +48,9 @@ const UpdateProfile = () => {
 
     useEffect(() => {
         preload()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
+    
 
     const handleChange = name => event => {
         setValues({...values,[name]:event.target.value});

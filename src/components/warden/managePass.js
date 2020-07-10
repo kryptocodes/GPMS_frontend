@@ -26,6 +26,7 @@ const ManagePass = () => {
 
     useEffect(() => {
         Student()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const columns = [

@@ -47,6 +47,7 @@ const EditPass = ({match}) => {
 
       useEffect(() => {
           preload(match.params.passId)
+          // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
       const onSumbit = (event) => {

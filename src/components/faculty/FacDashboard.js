@@ -17,25 +17,26 @@ const FacDashboard = () => {
         loading:true
     })
 
-    const { name,email,dept,year,loading } = values
+    const { name,dept,year,loading } = values
 
     const { user } = isAuthenticated() 
 
     const preload = () => {
         getUser(user._id)
         .then(data =>{
-            const {name,email,year,dept} = data
+            const {name,year,dept} = data
             if(data.error){
                 console.log(data.error)
             }
             else{
-                setValues({...values,name,email,year,dept,loading:false})
+                setValues({...values,name,year,dept,loading:false})
             }
         })
     }
 
     useEffect(() => {
         preload()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const faculty = () => {

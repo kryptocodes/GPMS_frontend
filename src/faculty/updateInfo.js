@@ -45,6 +45,7 @@ const UpdateFacultyInfo = () => {
 
     useEffect(() => {
         preload()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const handleChange = name => event => {

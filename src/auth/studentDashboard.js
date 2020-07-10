@@ -8,7 +8,7 @@ const StudentRoute = ({ component: Component, ...rest }) => {
       <Route
         {...rest}
         render={props =>
-            (isAuthenticated() && isAuthenticated().user.role == 0) ? (
+            (isAuthenticated() && isAuthenticated().user.role === 0) ? (
                 <Component {...props} />
             ) : (
             <Redirect

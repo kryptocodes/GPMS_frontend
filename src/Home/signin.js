@@ -51,7 +51,7 @@ const Signin = () => {
     if (isAuthenticated()){
       setValues({didRedirect:true})
     }
-  });
+  },[]);
 
   //to perform redirect to dashboard
   const performRedirect = () => {

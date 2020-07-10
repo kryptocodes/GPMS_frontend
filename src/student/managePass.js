@@ -32,6 +32,7 @@ const ManagePass = () => {
 
     useEffect(() => {
         preload()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const goBack = () => {

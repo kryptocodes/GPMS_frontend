@@ -16,7 +16,7 @@ const HomeDashboard = () => {
         <div className="col-md-3 p-2">
         <Card 
             hoverable
-            cover={<img alt="image" 
+            cover={<img alt="attendance" 
             src={AttendancePNG}
             className="p-4 mx-auto"
             />}>
@@ -26,7 +26,7 @@ const HomeDashboard = () => {
         <div className="col-md-3 p-2">
         <Card 
         hoverable
-        cover={<img alt="image" 
+        cover={<img alt="attendance_log" 
         src="https://static.thenounproject.com/png/342013-200.png"
         className="p-4 mx-auto"
         />}>
@@ -36,7 +36,7 @@ const HomeDashboard = () => {
         <div className="col-md-3 p-2">
         <Card 
             hoverable
-            cover={<img alt="image" 
+            cover={<img alt="manage_pass" 
             src={ManagePassPNG}
             className="p-4 mx-auto w-75"
             />}>
@@ -46,7 +46,7 @@ const HomeDashboard = () => {
         <div className="col-md-3 p-2">
         <Card 
         hoverable
-        cover={<img alt="image" 
+        cover={<img alt="student_info" 
         src="https://i7.uihere.com/icons/251/857/218/user-info-dc772ffbb3eeb53b4008d7b949983dae.png"
         className="p-4 mx-auto"
         />}>
@@ -56,7 +56,7 @@ const HomeDashboard = () => {
         <div className="col-md-3 p-2">
         <Card 
         hoverable
-        cover={<img alt="image" 
+        cover={<img alt="enrollment" 
         src="https://i7.uihere.com/icons/251/857/218/user-info-dc772ffbb3eeb53b4008d7b949983dae.png"
         className="p-4 mx-auto"
         />}>
