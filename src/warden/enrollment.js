@@ -7,7 +7,7 @@ const Enrollment = () => {
     return (
         <Base title="Enrollment"
                className="container mx-auto shadow-lg mt-2 mb-2">
-               {goBack()}
+               {goBack("ml-1","/warden/dashboard")}
                {EnRoll()}
         </Base>
     )

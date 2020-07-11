@@ -13,7 +13,6 @@ import OutPass from './student/outpass'
 import ManagePass from './student/managePass'
 import ViewPass from './faculty/view_pass'
 import UpdateFacultyInfo from './faculty/updateInfo'
-import QR_code from './student/qrcode'
 import EditPass from './student/editPass'
 import SecurityDashboard from './security/security_dashboard'
 import Entry_check from './security/entry_check'
@@ -44,7 +43,6 @@ export default function Routes() {
                     <StudentRoute path="/student/gatepass" exact component={ApplyPass}/>
                     <StudentRoute path="/student/outpass" exact component={OutPass}/>
                     <StudentRoute path="/student/viewpass" exact component={ManagePass}/>
-                    <StudentRoute path="/student/pass/qrcode/:passId" exact component={QR_code}/>
                     <StudentRoute path="/student/pass/editpass/:passId" exact component={EditPass}/>
                    
                     <SecurityRoute path="/security/dashboard" exact component={SecurityDashboard}/>

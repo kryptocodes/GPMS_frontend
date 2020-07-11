@@ -19,23 +19,16 @@ if (typeof importScripts === 'function') {
           })
         )
       );
-  
-      // Adding staleWhileRevalidate for all js files. Provide faster access from cache while revalidating in the background
-      workbox.routing.registerRoute(
-        /.*\.js$/,
+       // Adding staleWhileRevalidate for all img files
+       workbox.routing.registerRoute(
+        /.*\/imgs\/(.*\/)?.*\.(png|jpg|jpeg|gif|svg)/,
         new workbox.strategies.StaleWhileRevalidate()
       );
-  
-      // Adding staleWhileRevalidate for all html files
       workbox.routing.registerRoute(
-        /.*\.html/,
-        new workbox.strategies.StaleWhileRevalidate()
-      );
-  
-      // Adding staleWhileRevalidate for all css files
-      workbox.routing.registerRoute(
-        /.*\.css/,
-        new workbox.strategies.StaleWhileRevalidate()
+        new RegExp('/*'),
+        new workbox.strategies.NetworkFirst({
+          cacheName: CACHE
+        })
       );
     } else {
       console.log('Workbox could not be loaded. Hence, no offline support.');
