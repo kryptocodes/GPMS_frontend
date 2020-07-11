@@ -1,10 +1,12 @@
 import { API } from '../../backend'
 
-export const getStudent = () =>{
-    return fetch(`${API}/student`,{
+export const getStudent = (userId,token) =>{
+    return fetch(`${API}/student/${userId}`,{
         method:"GET",
         headers:{
             Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         }
     })
     .then(response =>{

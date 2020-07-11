@@ -65,6 +65,7 @@ const EnRoll = () => {
                 layout="vertical"
                 onFinish={onSubmit}
                 onFinishFailed={onFinishFailed}
+                className="card shadow p-5"
                 >
                 <Form.Item
                     name="name"
@@ -172,13 +173,17 @@ const EnRoll = () => {
     }
 
     return (
-        <div className="mx-auto row rounded">
-            <div className="col-md-5 mx-auto">
-            {errorMessage()}
-            {Loading ? Success() :
-            stud() }
-            </div>
-        </div>
+        <React.Fragment>
+            {Loading ? Success() :(
+                <div className="row bg-white rounded mb-5">
+                <div className="col-md-8 mx-auto">
+                {errorMessage()}
+                {stud()}
+                </div>
+                </div>
+            )
+             }
+             </React.Fragment>
     )
 }
 

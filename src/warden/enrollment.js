@@ -6,8 +6,8 @@ import goBack from '../components/common/back'
 const Enrollment = () => {
     return (
         <Base title="Enrollment"
-               className="container mx-auto shadow-lg mt-2 mb-2">
-               {goBack("ml-1","/warden/dashboard")}
+               className="container">
+               {goBack({className:"ml-1",Route:"/warden/dashboard"})}
                {EnRoll()}
         </Base>
     )

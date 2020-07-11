@@ -8,7 +8,7 @@ const updateProfile = () => {
         <Base 
          title="Update Profile"
          className="container">
-         {goBack({className:"ml-5",Route:"/dashboard"})}
+         {goBack({className:"ml-2",Route:"/dashboard"})}
          {Profile()}
         </Base>
     )

@@ -1,9 +1,10 @@
 import React,{ useState , useEffect } from 'react'
+import { getStudent } from '../../auth/helpers/wardenStats';
+import { isAuthenticated } from '../../auth';
 
 //ant components
-import 'antd/dist/antd.css';
 import { Table } from 'antd';
-import { getStudent } from '../../auth/helpers/wardenStats';
+
 
 
 
@@ -11,13 +12,16 @@ const StudentInfo = () => {
 
     const [values,setValues] = useState([])
 
+    const { user, token } = isAuthenticated()
+
     const Student = () => {
-        getStudent()
+        getStudent(user._id,token)
         .then(data => {
             if(data.error){
                 console.log(data.error)
             } else{
                 setValues(data)
+                console.log(data)
             }
         })
     }
@@ -64,20 +68,38 @@ const StudentInfo = () => {
         name: student.name,
         dept: student.dept,
         year: student.year,
-        room_no: student.room_no
+        room_no: student.room_no,
+        mobile_no: student.mobile_no,
+        roll_no: student.roll_no,
+        address: student.address
     }))
 
 
 
     const StudentTable = () => {
         return(
-            <Table columns={columns} dataSource={data} bordered pagination={false} />
+            <Table
+                className="table-responsive"
+                columns={columns}
+                expandable={{
+                    expandedRowRender: record => ( 
+                        <p className="mx-auto">
+                            <strong className="p-4">Mobile No:</strong>{record.mobile_no}
+                            <br/>
+                            <strong className="p-4">Roll No:</strong>{record.roll_no}
+                            <br/>
+                            <strong className="p-4">Address:</strong>{record.address}
+                        </p>)
+                }} 
+                dataSource={data} 
+                bordered 
+                pagination={false} />
         )
     }
     
     
     return (
-        <div>
+        <div className="container">
             {StudentTable()}
         </div>
     )

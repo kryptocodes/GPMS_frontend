@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{ useState, useEffect} from 'react'
 import { isAuthenticated } from '../../auth'
 import { UpdateInfo, getUser } from '../../auth/update'
 import { ToastContainer, toast } from 'react-toastify'
@@ -133,15 +133,12 @@ const Profile = () => {
     return (
         <React.Fragment>
         <ToastContainer position="top-center"/>
-        <div className="container">
-        {loading && LoadingScreen()}
-        {!loading && (
+        {loading ? LoadingScreen() : (
         <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">
             {updateForm()}
         </div>
         </div>)}
-        </div>
         </React.Fragment>
     )
 }
