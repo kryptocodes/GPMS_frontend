@@ -95,19 +95,28 @@ const Profile = () => {
                     value={room_no}
                 />
                 <p className="lead">Year</p>
-                <input type="text"
-                    className="form-control my-3"
-                    onChange={handleChange("year")}
-                    required
-                    value={year}
-                />
+                <select name="year" 
+                        className="form-control my-3"
+                        onChange={handleChange("year")}
+                        required
+                        value={year}>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                </select>
                 <p className="lead">Dept</p>
-                <input type="text"
-                    className="form-control my-3"
-                    onChange={handleChange("dept")}
-                    required
-                    value={dept}
-                />
+                <select name="dept" 
+                        className="form-control my-3"
+                        onChange={handleChange("dept")}
+                        required
+                        value={dept}>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="CE">CE</option>
+                    <option value="ME">ME</option>
+                </select>
                 <p className="lead">Mobile No</p>
                 <input type="text"
                     className="form-control my-3"
@@ -135,7 +144,7 @@ const Profile = () => {
         <ToastContainer position="top-center"/>
         {loading ? LoadingScreen() : (
         <div className="row bg-white rounded">
-        <div className="col-md-8 offset-md-2">
+        <div className="col-md-8 mb-5 offset-md-2">
             {updateForm()}
         </div>
         </div>)}

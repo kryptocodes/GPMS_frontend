@@ -187,17 +187,15 @@ const Signin = () => {
 
   return (
       
-      <div className="container p-3">
+      <div className="container m-5 mx-auto">
       <Card>
-      <div className="row offset-md-2 ">
-      <div className="col-md-4 rounded pt-5 mt-3">
-      <a href="https://amrita.edu.in">
+      <div className="row offset-md-2">
+      <div className="col-md-5 rounded pt-5 mt-3">
       <img src={logo} 
           className="w-100"
           alt="Amrita logo"/>
-      </a>
       </div>
-      <div className="col-md-6 col-lg-5" >
+      <div className="col-md-7 col-lg-5" >
       {signInForm()}
       {performRedirect()}
       </div>

@@ -3,12 +3,12 @@ import ReactLoading from 'react-loading';
 
 const LoadingScreen = () => {
     return (
-        <div className="loading">
+        <div className="loading" style={{paddingTop:"15vh"}}>
                 <ReactLoading 
-                    type={'cylon'} 
+                    type={'bars'} 
                     color={'#001529'} 
                     height={'10%'} 
-                    width={'25%'}
+                    width={'30%'}
                     className="mx-auto" />
                     <h1 className="loading-text text-center">Loading</h1>
          </div>

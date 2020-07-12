@@ -11,6 +11,8 @@ const ManagePass = () => {
 
     const [values,setValues] = useState([])
 
+    const [Loading,setLoading] = useState(true)
+
     const { user,token } = isAuthenticated()
 
     const Student = () => {
@@ -20,6 +22,7 @@ const ManagePass = () => {
                 console.log(data.error)
             } else{
                 setValues(data)
+                setLoading(false)
             }
         })
     }
@@ -93,7 +96,8 @@ const ManagePass = () => {
                 }} 
                 dataSource={data} 
                 bordered 
-                pagination={false} />
+                pagination={false}
+                loading={Loading}/>
         )
     }
     

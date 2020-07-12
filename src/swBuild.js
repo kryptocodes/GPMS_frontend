@@ -6,7 +6,7 @@ const buildSW = () => {
       swSrc: 'src/swTemplate.js',
       swDest: 'build/service-worker.js',
       globDirectory: 'build',
-      globPatterns: ['**/*.{png,jpg,jpeg}'],
+      globPatterns: ['**/*.{html,css,js,png,jpg,jpeg,svg}'],
     })
     .then(({count, size, warnings}) => {
       // Optionally, log any warnings and details.

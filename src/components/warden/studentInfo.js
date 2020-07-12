@@ -12,6 +12,8 @@ const StudentInfo = () => {
 
     const [values,setValues] = useState([])
 
+    const [Loading,setLoading] = useState(true)
+
     const { user, token } = isAuthenticated()
 
     const Student = () => {
@@ -21,19 +23,20 @@ const StudentInfo = () => {
                 console.log(data.error)
             } else{
                 setValues(data)
-                console.log(data)
+                setLoading(false)
             }
         })
     }
 
     useEffect(() => {
         Student()
+        // eslint-disable-next-line
     },[])
 
     const columns = [
         {
             title: 'S.No',
-            width: 5,
+            width: 15,
             dataIndex: 'key',
             key: 'key'
         },
@@ -93,13 +96,14 @@ const StudentInfo = () => {
                 }} 
                 dataSource={data} 
                 bordered 
-                pagination={false} />
+                pagination={false}
+                loading={Loading} />
         )
     }
     
     
     return (
-        <div className="container">
+        <div>
             {StudentTable()}
         </div>
     )
