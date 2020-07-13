@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import { signin ,authenticate , isAuthenticated } from "../auth/index"
 import logo from '../assets/logo.png'
 
-
 //antd components
 import { Form, Input, Button, Checkbox, Card } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
@@ -188,7 +187,6 @@ const Signin = () => {
   }
 
   return (
-      
       <div className="container m-5 mx-auto">
       <Card>
       <div className="row offset-md-2">

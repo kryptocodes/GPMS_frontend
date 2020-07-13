@@ -8,7 +8,7 @@ const LoadingScreen = () => {
                     type={'bars'} 
                     color={'#001529'} 
                     height={'10%'} 
-                    width={'30%'}
+                    width={'20vh'}
                     className="mx-auto" />
                     <h1 className="loading-text text-center">Loading</h1>
          </div>
