@@ -24,12 +24,6 @@ if (typeof importScripts === 'function') {
         /.*\/imgs\/(.*\/)?.*\.(png|jpg|jpeg|gif|svg)/,
         new workbox.strategies.StaleWhileRevalidate()
       );
-      workbox.routing.registerRoute(
-        new RegExp('/*'),
-        new workbox.strategies.NetworkFirst({
-          cacheName: CACHE
-        })
-      );
     } else {
       console.log('Workbox could not be loaded. Hence, no offline support.');
     }

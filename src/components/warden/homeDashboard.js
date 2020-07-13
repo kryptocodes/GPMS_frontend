@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 //img
 import AttendancePNG  from '../../assets/Warden/attendance.png'
 import ManagePassPNG from '../../assets/Warden/managePass.png'
+import logsPNG from '../../assets/logs.png'
 
 //antd components
 import { Card } from 'antd'
@@ -27,7 +28,7 @@ const HomeDashboard = () => {
         <Card 
         hoverable
         cover={<img alt="attendance_log" 
-        src="https://static.thenounproject.com/png/342013-200.png"
+        src={logsPNG}
         className="p-4 mx-auto"
         />}>
         <Link to="/warden/log"><p className="lead text-center">Attendance Log</p></Link>

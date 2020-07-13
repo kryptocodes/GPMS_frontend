@@ -13,10 +13,11 @@ const Signin = () => {
   const [values , setValues] = useState({
     error: "",
     buttonText:"Log in",
-    didRedirect: false
+    didRedirect: false,
+    Loading:false
   })
 
-  const { email,password,error,didRedirect} = values;
+  const { email,password,error,didRedirect,Loading} = values;
   const { user } = isAuthenticated()
 
   const handleChange = name => event => {
@@ -24,11 +25,11 @@ const Signin = () => {
   }
 
   const onSubmit = values => {
-    setValues({ ...values,error: false, loading: true})
+    setValues({ ...values,error: false, Loading:true })
     signin(values)
       .then(data => {
         if(data.error) {
-          setValues({...values,error:data.error, loading:false})
+          setValues({...values,error:data.error, Loading:false })
           console.log(values)
         } else{
           authenticate(data, () => {
@@ -131,6 +132,7 @@ const Signin = () => {
             type="primary"
             htmlType="submit"
             className="btn-block login-form-button"
+            loading={Loading}
           >
             Log in
           </Button>
