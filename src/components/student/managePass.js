@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{ useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { getUserPass } from '../../auth/pass' 
 import { isAuthenticated } from '../../auth'
@@ -14,12 +14,13 @@ const ManagePass = () => {
 
     const [loading,setLoading] = useState(true)
 
-    const {user,token} = isAuthenticated()
+    const [filters,setFilter] = useState(false)
+
+    const { user, token} = isAuthenticated()
 
     const preload = () => {
         getUserPass(user._id,token)
         .then(data => {
-            console.log(data)
             if(data.error){
                 console.log(data.error)
             } else{
@@ -47,13 +48,12 @@ const ManagePass = () => {
     }
 
     const passinfo = () => (
-        <React.Fragment>
-        {(values.length === 0) &&
-        (<img src={Empty} className="rounded d-block mx-auto w-75" 
-         alt="empty"/>)
-        }
-        <div className="jumbotron-fluid">
-        {values && values.map((pass,index) => (
+        <div className="container">
+        {(values.length === 0) ?
+            (<img src={Empty} className="rounded d-block mx-auto w-75" 
+             alt="empty"/>) :options()
+            }
+        {values && values.filter(pass => (filters ? pass.status === filters : pass )).map((pass,index) => (
             <ul className="list-group" key={index}>
             <div className="card my-4 p-4">
                     <h4 className="card-header row m-0 bg-dark text-white bd-highlight">
@@ -103,9 +103,38 @@ const ManagePass = () => {
         </div>
         </ul>
         ))}      
-        </div>
-        </React.Fragment>         
+        </div>      
     )
+
+    const options = () => {
+        return(
+            <div className="d-flex justify-content-center">
+            <div className="mx-auto btn-group btn-group-toggle" data-toggle="buttons">
+                 <label className="btn btn-outline-secondary active">
+                     <input 
+                        type="radio" 
+                        onClick={() => setFilter(false)}/> All
+                </label>
+                <label className="btn btn-outline-secondary">
+                <input 
+                   type="radio" 
+                   onClick={() => setFilter('Approved')}/> Approved
+                </label>
+                <label className="btn btn-outline-secondary">
+                <input 
+                   type="radio" 
+                   onClick={() => setFilter('Under Process')}/> Under Process
+                </label>
+                <label className="btn btn-outline-secondary">
+                     <input 
+                        type="radio" 
+                        onClick={() => setFilter('Declined')}/> Declined
+                </label>
+            </div>
+            </div>
+                   
+        )
+    }
 
     return (
         <React.Fragment>
