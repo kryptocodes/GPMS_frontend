@@ -46,11 +46,11 @@ const FacDashboard = () => {
                         <Link to="/faculty/studentinfo" className="nav-link text-info col-md-3">
                         <Card hoverable className="list-group-item">Check Student Info</Card>
                         </Link>
-                        <Link to="/faculty/viewpass" className="nav-link text-info col-md-3">
-                        <Card hoverable className="list-group-item">View Pass</Card>
+                        <Link to="/faculty/managepass" className="nav-link text-info col-md-3">
+                        <Card hoverable className="list-group-item">Manage Pass</Card>
                         </Link>
                         <Link className="nav-link text-info col-md-3">
-                        <Card hoverable className="list-group-item">Log</Card>
+                        <Card hoverable className="list-group-item">Logs</Card>
                         </Link>
                         <Link to="/faculty/updatepassword" className="nav-link text-info col-md-3">
                         <Card hoverable className="list-group-item">Change Password</Card>

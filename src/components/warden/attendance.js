@@ -19,9 +19,8 @@ const Attendance = () => {
     const { user,token } = isAuthenticated()
 
     const Student = () => {
-        getStudent()
+        getStudent(user._id,token)
         .then(data => {
-            console.log(data)
             if(data.error){
                 console.log(data.error)
             } else{
@@ -50,24 +49,8 @@ const Attendance = () => {
 
     useEffect(() => {
         Student()
+        // eslint-disable-next-line
     }, [])
-
-    /*const status = () => (
-        
-        <React.Fragment>
-        <button 
-            className="btn btn-sm btn-success"
-            onClick={(e)=>this.disableOnclick(e)}
-            >
-            Presnt
-        </button>
-        <button 
-            className="btn btn-sm btn-danger"
-            >
-            Absent    
-        </button>
-        </React.Fragment>
-    )*/
 
     const student = () => (
         <React.Fragment>

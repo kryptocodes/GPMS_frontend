@@ -37,7 +37,7 @@ export default function Routes() {
                     <FacultyRoute path="/faculty/studentinfo" exact component={StudentInfo}/>
                     <FacultyRoute path="/faculty/updatepassword" exact component={UpdatePassword}/>
                     <FacultyRoute path="/faculty/updateInfo" exact component={UpdateFacultyInfo}/>
-                    <FacultyRoute path="/faculty/viewpass" exact component={ViewPass}/>
+                    <FacultyRoute path="/faculty/managepass" exact component={ViewPass}/>
 
                     <StudentRoute path="/dashboard" exact component={Dashboard}/>
                     <StudentRoute path="/student/updatepassword" exact component={UpdatePassword}/>

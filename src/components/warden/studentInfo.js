@@ -3,7 +3,7 @@ import { getStudent } from '../../auth/helpers/wardenStats';
 import { isAuthenticated } from '../../auth';
 
 //ant components
-import { Table } from 'antd';
+import { Table,Descriptions } from 'antd';
 
 
 
@@ -86,13 +86,15 @@ const StudentInfo = () => {
                 columns={columns}
                 expandable={{
                     expandedRowRender: record => ( 
-                        <p className="mx-auto">
-                            <strong className="p-4">Mobile No:</strong>{record.mobile_no}
-                            <br/>
-                            <strong className="p-4">Roll No:</strong>{record.roll_no}
-                            <br/>
-                            <strong className="p-4">Address:</strong>{record.address}
-                        </p>)
+                        <Descriptions
+                            className="container" 
+                            column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+                            bordered >
+                            <Descriptions.Item label="Mobile No:">{record.mobile_no}</Descriptions.Item>
+                            <Descriptions.Item label="Roll No:">{record.roll_no}</Descriptions.Item>
+                            <Descriptions.Item label="Address:">{record.address}</Descriptions.Item>
+                        </Descriptions>
+                        )
                 }} 
                 dataSource={data} 
                 bordered 

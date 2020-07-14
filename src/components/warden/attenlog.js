@@ -18,7 +18,6 @@ const Attenlog = () => {
     const Student = () => {
         getAttendance()
         .then(data => {
-            console.log(data)
             if(data.error){
                 console.log(data.error)
             } else{
@@ -30,6 +29,7 @@ const Attenlog = () => {
 
     useEffect(() => {
         Student()
+        // eslint-disable-next-line
     }, [])
 
     const student = () => (
