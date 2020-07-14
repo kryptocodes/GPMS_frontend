@@ -25,6 +25,7 @@ import Atten from './warden/attenLog'
 import StudInfo from './warden/StudInfo'
 import ManagePaSS from './warden/ManagePaSS'
 import Enrollment from './warden/enrollment'
+import StudentInfo from './faculty/StudentInfo'
 
 export default function Routes() {
     return (
@@ -33,6 +34,7 @@ export default function Routes() {
                 <Switch>
                     <Route path="/" exact component={Home}/>
                     <FacultyRoute path="/faculty/dashboard" exact component={FacultyDashboard}/>
+                    <FacultyRoute path="/faculty/studentinfo" exact component={StudentInfo}/>
                     <FacultyRoute path="/faculty/updatepassword" exact component={UpdatePassword}/>
                     <FacultyRoute path="/faculty/updateInfo" exact component={UpdateFacultyInfo}/>
                     <FacultyRoute path="/faculty/viewpass" exact component={ViewPass}/>

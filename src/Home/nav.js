@@ -20,12 +20,14 @@ const Nav = ({history}) => (
                 >
                     Signout
                 </a>
+                
             </li>
             )}
              
         </ul>
     </nav>
     </div>
+    
 )
 
 

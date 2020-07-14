@@ -43,7 +43,7 @@ const FacDashboard = () => {
         return (
             <Card>      
                     <div className="row m-0">
-                        <Link className="nav-link text-info col-md-3">
+                        <Link to="/faculty/studentinfo" className="nav-link text-info col-md-3">
                         <Card hoverable className="list-group-item">Check Student Info</Card>
                         </Link>
                         <Link to="/faculty/viewpass" className="nav-link text-info col-md-3">

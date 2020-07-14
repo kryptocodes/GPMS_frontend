@@ -44,7 +44,6 @@ const Exit_check = () => {
                 console.log(data.error)
                 setValues({showQR:false,showError:data.error})
             } else{
-                console.log(data)
                 setValues({
                     ...values,
                     showQR:false,
