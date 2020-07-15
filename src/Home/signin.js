@@ -195,7 +195,7 @@ const Signin = () => {
           className="w-100"
           alt="Amrita logo"/>
       </div>
-      <div className="col-md-7 col-lg-5">
+      <div className="col-md-7 col-lg-4">
       {signInForm()}
       {performRedirect()}
       </div>

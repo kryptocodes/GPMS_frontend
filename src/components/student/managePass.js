@@ -6,6 +6,7 @@ import Empty from '../../assets/empty.svg'
 import LoadingScreen from '../../Home/loadingScreen'
 import QR_code from './qrcode'
 
+//antd components
 import { Modal } from 'antd'
 
 const ManagePass = () => {
@@ -131,8 +132,7 @@ const ManagePass = () => {
                         onClick={() => setFilter('Declined')}/> Declined
                 </label>
             </div>
-            </div>
-                   
+            </div>       
         )
     }
 

@@ -44,16 +44,16 @@ const FacDashboard = () => {
             <Card>      
                     <div className="row m-0">
                         <Link to="/faculty/studentinfo" className="nav-link text-info col-md-3">
-                        <Card hoverable className="list-group-item">Check Student Info</Card>
+                        <Card hoverable className="list-group-item h-100">Check Student Info</Card>
                         </Link>
                         <Link to="/faculty/managepass" className="nav-link text-info col-md-3">
-                        <Card hoverable className="list-group-item">Manage Pass</Card>
+                        <Card hoverable className="list-group-item h-100">Manage Pass</Card>
                         </Link>
                         <Link className="nav-link text-info col-md-3">
-                        <Card hoverable className="list-group-item">Logs</Card>
+                        <Card hoverable className="list-group-item h-100">Logs</Card>
                         </Link>
                         <Link to="/faculty/updatepassword" className="nav-link text-info col-md-3">
-                        <Card hoverable className="list-group-item">Change Password</Card>
+                        <Card hoverable className="list-group-item h-100">Change Password</Card>
                         </Link>
                     </div>
             </Card>
@@ -80,8 +80,8 @@ const FacDashboard = () => {
 
     return (
         <React.Fragment>
-            {loading && LoadingScreen()}
-            {!loading &&  <React.Fragment>
+            {loading ? LoadingScreen() :
+            <React.Fragment>
             <div className="shadow mx-auto mb-4">
                 {faculty()}
                 </div>
