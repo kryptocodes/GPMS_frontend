@@ -34,9 +34,9 @@ const ManagePass = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    const onSubmit = (passId,status) => {
+    const onSubmit = async (passId,status) => {
         console.log(status)
-        updateStatus(user._id,token,passId,status)
+        await updateStatus(user._id,token,passId,status)
         .then(data => {
             if(data.error){
                 console.log(data.error)
@@ -56,6 +56,20 @@ const ManagePass = () => {
             cancelText:"Close",
             onOk() {
                 onSubmit(passId,status)
+            }
+        })
+    }
+
+    const Decline = (passId,status) => {
+        Modal.confirm({
+            title:"Pass",
+            centered:true,
+            content:"Are you sure? Do you want to decline",
+            okText:"Decline",
+            okType:"danger",
+            cancelText:"Close",
+            onOk() {
+                 onSubmit(passId,status)
             }
         })
     }
@@ -124,7 +138,7 @@ const ManagePass = () => {
         </li>
         <div className="d-flex">
         <button onClick={() =>{Approve(pass._id,{status:"Approved"})}}  type="button" className="btn btn-sm btn-warning mr-3">Approve</button>
-        <button onClick={() =>{onSubmit(pass._id,{status:"Declined"})}} type="button" className="btn btn-sm btn-danger">Decline</button>
+        <button onClick={() =>{Decline(pass._id,{status:"Declined"})}} type="button" className="btn btn-sm btn-danger">Decline</button>
         </div>
         </div>
         </div>
