@@ -11,7 +11,7 @@ export default function Home() {
         <React.Fragment>
         <Offline>{OfflineContent()}</Offline>
         <Online>
-        <div className="m-0 mt-auto" style={{paddingTop:"10vh"}}>
+        <div className="m-0" style={{paddingTop:"10vh"}}>
             {Signin()}
         </div>
         </Online>

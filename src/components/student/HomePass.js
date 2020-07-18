@@ -64,7 +64,7 @@ const HomePass = () => {
     }
 
     const warning = () => (
-        <div className="text-danger">This field is required</div>
+        <div className="invalid-feedback d-block">This field is required</div>
     )
 
     const Success = () => (
@@ -82,27 +82,27 @@ const HomePass = () => {
     const HomePassForm = () => {
         return(
             <form>
-            <div className="form-group jumbotron bg-white shadow rounded">
+            <div className="card form-group jumbotron bg-white shadow rounded">
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Time</p>
-            <div className="form-row mx-auto p-2">
-            <div className="col-md-6">
+            <div className="row mx-auto my-3 justify-content-center">
+            <div className="col-md-5">
             <p className="lead">Expected leaving time</p>
             <input type="time"
-                className="form-control my-3"
+                className={errors.exp_dep_time ? "form-control is-invalid" : "form-control"}
                 onChange={handleChange("exp_dep_time")}
                 required
                 name="exp_dep_time"
                 value={exp_dep_time}
                 placeholder="hh:mm"
-                ref={register({required:true })}
+                ref={register({required:true, })}
                 />
                  {errors.exp_dep_time && warning()}
             </div>
             <div className="col-md-5">
                 <p className="lead">Expected arrival time</p>
                 <input type="time"
-                    className="form-control my-3"
+                    className={errors.exp_arr_time ? "form-control is-invalid" : "form-control"}
                     onChange={handleChange("exp_arr_time")}
                     required
                     name="exp_arr_time"
@@ -116,11 +116,11 @@ const HomePass = () => {
             </div>
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Date</p>
-            <div className="row mx-auto p-2">
+            <div className="card-body row mx-auto my-3 p-2">
             <div className="col-md-6">
             <p className="lead">From</p>
             <input type="date"
-                className="form-control my-3"
+                className={errors.from_date ? "form-control is-invalid" : "form-control"}
                 onChange={handleChange("from_date")}
                 required
                 name="from_date"
@@ -133,7 +133,7 @@ const HomePass = () => {
             <div className="col-md-6">
                 <p className="lead">To</p>
                 <input type="date"
-                    className="form-control my-3"
+                    className={errors.to_date ? "form-control is-invalid" : "form-control"}
                     onChange={handleChange("to_date")}
                     required
                     name="to_date"
@@ -149,7 +149,7 @@ const HomePass = () => {
                 <p className="lead card-header text-white bg-dark">Reason</p>
                 <div className="p-2">
                 <textarea type="text"
-                    className="form-control my-3"
+                    className={errors.reason ? "form-control is-invalid" : "form-control"}
                     onChange={handleChange("reason")}
                     required
                     name="reason"

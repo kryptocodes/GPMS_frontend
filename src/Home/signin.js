@@ -29,7 +29,6 @@ const Signin = () => {
       .then(data => {
         if(data.error) {
           setValues({...values,error:data.error, Loading:false })
-          console.log(values)
         } else{
           authenticate(data, () => {
             setValues({
@@ -187,15 +186,15 @@ const Signin = () => {
   }
 
   return (
-      <div className="container my-5 mx-auto">
-      <Card>
-      <div className="row d-flex justify-content-center">
+      <div className="container mx-auto">
+      <Card className="jumbotron bg-white shadow rounded">
+      <div className="row justify-content-center">
       <div className="col-md-5 rounded pt-5 mt-3">
       <img src={logo} 
           className="w-100"
           alt="Amrita logo"/>
       </div>
-      <div className="col-md-7 col-lg-4">
+      <div className="col-md-5 col-lg-4">
       {signInForm()}
       {performRedirect()}
       </div>
