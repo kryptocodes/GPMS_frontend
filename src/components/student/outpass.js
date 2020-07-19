@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form"
 import { Result, Button } from 'antd'
 
 
-const HomePass = () => {
+const Outpass = () => {
     
     const { register,handleSubmit,errors } = useForm()
 
@@ -19,8 +19,8 @@ const HomePass = () => {
     const {user: {_id,year,dept} ,token} = isAuthenticated()
 
     const onSubmit = (values) => {
-        const {exp_arr_time,exp_dep_time,from_date,to_date,reason} = values
-        const value = {exp_arr_time,exp_dep_time,from_date,to_date,reason,info:_id,year:year,dept:dept}
+        const {exp_arr_time,exp_dep_time,reason} = values
+        const value = {exp_arr_time,exp_dep_time,reason,info:_id,year:year,dept:dept,pass_type:"Out Pass"}
         createPass(_id,token,value)
         .then(data => {
             if(data.error){
@@ -48,7 +48,7 @@ const HomePass = () => {
     ]}/>
     )
 
-    const HomePassForm = () => {
+    const OutPassForm = () => {
         return(
             <form onSubmit={handleSubmit(onSubmit)}>
             <div className="card form-group jumbotron bg-white shadow rounded">
@@ -77,31 +77,6 @@ const HomePass = () => {
             </div>
             </div>
             </div>
-            <div className="card my-2">
-            <p className="lead card-header text-white bg-dark">Date</p>
-            <div className="row mx-auto my-3 justify-content-center">
-            <div className="col-md-6">
-            <p className="lead">From</p>
-            <input type="date"
-                className={errors.from_date ? "form-control is-invalid" : "form-control"}         
-                name="from_date"
-                placeholder="dd-mm-yyyy"
-                ref={register({required:true})}
-                />
-                {errors.from_date && warning()}
-            </div>
-            <div className="col-md-6">
-                <p className="lead">To</p>
-                <input type="date"
-                    className={errors.to_date ? "form-control is-invalid" : "form-control"}
-                    name="to_date"
-                    placeholder="dd-mm-yyyy"
-                    ref={register({required:true})}
-                />
-                {errors.to_date && warning()}
-            </div>
-                </div>
-                </div>
                 <div className="card my-2">
                 <p className="lead card-header text-white bg-dark">Reason</p>
                 <div className="p-2">
@@ -126,7 +101,7 @@ const HomePass = () => {
         {success ? Success() : (
         <div className="row bg-white rounded">
         <div className="container col-md-8 offset-md-2">
-            {HomePassForm()}
+            {OutPassForm()}
         </div>
         </div>)}
         </React.Fragment>
@@ -139,4 +114,4 @@ const HomePass = () => {
 
 
 
-export default HomePass
+export default Outpass

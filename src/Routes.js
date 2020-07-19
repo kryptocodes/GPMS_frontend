@@ -44,7 +44,7 @@ export default function Routes() {
                     <StudentRoute path="/student/updateprofile" exact component={UpdateProfile}/>
                     <StudentRoute path="/student/gatepass" exact component={ApplyPass}/>
                     <StudentRoute path="/student/outpass" exact component={OutPass}/>
-                    <StudentRoute path="/student/viewpass" exact component={ManagePass}/>
+                    <StudentRoute path="/student/managepass" exact component={ManagePass}/>
                     <StudentRoute path="/student/pass/editpass/:passId" exact component={EditPass}/>
                    
                     <SecurityRoute path="/security/dashboard" exact component={SecurityDashboard}/>

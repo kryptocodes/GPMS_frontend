@@ -8,7 +8,7 @@ const EditPass = ({match}) => {
         <Base 
             title="Edit Pass"
             className="container">
-            {goBack({className:"ml-1",Route:"/student/viewpass"})}
+            {goBack({className:"ml-1",Route:"/student/managepass"})}
             {EditPas({match})}
             </Base>
     )

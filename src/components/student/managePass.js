@@ -111,7 +111,7 @@ const ManagePass = () => {
         return(
             <div className="d-flex justify-content-center">
             <div className="mx-auto btn-group btn-group-toggle" data-toggle="buttons">
-                 <label className="btn btn-outline-secondary active">
+                 <label className="btn btn-outline-secondary">
                      <input 
                         type="radio" 
                         onClick={() => setFilter(false)}/> All

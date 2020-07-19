@@ -6,32 +6,24 @@ import LoadingScreen from '../../Home/loadingScreen'
 
 //ant component
 import { Card, Descriptions } from 'antd'
+import { toast } from 'react-toastify'
 
 const StudentBoard = () => {
 
-    const [values,setValues] = useState({
-        name:"",
-        roll_no:"",
-        room_no:"",
-        dept:"",
-        year:"",
-        mobile_no:"",
-        address:"",
-        loading:true
-    })
+    const [values,setValues] = useState({})
 
-    const {name,roll_no,room_no,dept,year,mobile_no,address,loading} = values;
+    const [loading,setLoading] = useState(true)
     
     const {user} = isAuthenticated()
 
     const preload = () => {
         getUser(user._id)
         .then(data => {
-            const {roll_no,name,room_no,dept,year,mobile_no,address} = data;
             if(data.error){
-                setValues({...values,error:data.error})
+                toast.error(data.error)
             } else{
-                setValues({...values,roll_no,name,room_no,dept,year,mobile_no,address,loading:false})
+                setValues(data)
+                setLoading(false)
             }
         })
     }
@@ -54,7 +46,7 @@ const StudentBoard = () => {
                         <Link to="/student/outpass" className="nav-link text-info">Apply Out Pass</Link>
                     </Card>
                     <Card hoverable>
-                    <Link to="/student/viewpass" className="nav-link text-info">View Pass Status</Link>
+                    <Link to="/student/managepass" className="nav-link text-info">Manage Pass</Link>
                     </Card>
                     <Card hoverable>
                     <Link to="/student/updatepassword" className="nav-link text-info">Update Password</Link>
@@ -65,6 +57,7 @@ const StudentBoard = () => {
     }
 
     const info = () => {
+        const {name,roll_no,room_no,dept,year,mobile_no,address } = values
         return(
                 <Card 
                     title="Student Information"

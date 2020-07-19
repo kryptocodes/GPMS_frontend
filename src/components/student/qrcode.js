@@ -3,8 +3,6 @@ import { QRCode } from "react-qr-svg";
 
 const QR_code = (passId) => {
 
-    console.log(passId)
-
     const PassToken = () => {
         return(
                 <div className="jumbotron-fluid rounded">
