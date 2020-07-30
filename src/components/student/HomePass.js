@@ -12,7 +12,9 @@ import { Result, Button } from 'antd'
 
 const HomePass = () => {
     
-    const { register,handleSubmit,errors } = useForm()
+    const { register,watch,handleSubmit,errors } = useForm()
+
+    const watchFields = watch(["from_date"])
 
     const [success,setSuccess] = useState(false)
 
@@ -51,7 +53,7 @@ const HomePass = () => {
     const HomePassForm = () => {
         return(
             <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="card form-group jumbotron bg-white shadow rounded">
+            <div className="card text-center form-group jumbotron bg-white shadow rounded">
             <div className="card my-2">
             <p className="lead card-header text-white bg-dark">Time</p>
             <div className="row mx-auto my-3 justify-content-center">
@@ -73,6 +75,7 @@ const HomePass = () => {
                     placeholder="hh:mm"
                     ref={register({required:true})}
                 />
+                {console.log(watchFields.from_date)}
                 {errors.exp_arr_time && warning() }
             </div>
             </div>
@@ -81,7 +84,7 @@ const HomePass = () => {
             <p className="lead card-header text-white bg-dark">Date</p>
             <div className="row mx-auto my-3 justify-content-center">
             <div className="col-md-6">
-            <p className="lead">From</p>
+            <p className="lead">Exp. Leaving Date</p>
             <input type="date"
                 className={errors.from_date ? "form-control is-invalid" : "form-control"}         
                 name="from_date"
@@ -91,12 +94,12 @@ const HomePass = () => {
                 {errors.from_date && warning()}
             </div>
             <div className="col-md-6">
-                <p className="lead">To</p>
+                <p className="lead">Exp. Arrival Date</p>
                 <input type="date"
                     className={errors.to_date ? "form-control is-invalid" : "form-control"}
                     name="to_date"
                     placeholder="dd-mm-yyyy"
-                    ref={register({required:true})}
+                    ref={register({required:true,validate: value => value >= watchFields.from_date })}
                 />
                 {errors.to_date && warning()}
             </div>

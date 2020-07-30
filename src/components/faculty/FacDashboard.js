@@ -9,27 +9,21 @@ import { Card, Descriptions } from 'antd'
 
 const FacDashboard = () => {
 
-    const [values,setValues] = useState({
-        name:"",
-        email:"",
-        dept:"",
-        year:"",
-        loading:true
-    })
+    const [values,setValues] = useState()
 
-    const { name,dept,year,loading } = values
+    const [loading,setLoading] = useState(true)
 
     const { user } = isAuthenticated() 
 
     const preload = () => {
         getUser(user._id)
         .then(data =>{
-            const {name,year,dept} = data
             if(data.error){
                 console.log(data.error)
             }
             else{
-                setValues({...values,name,year,dept,loading:false})
+                setValues(data)
+                setLoading(false)
             }
         })
     }
@@ -61,6 +55,7 @@ const FacDashboard = () => {
     }
 
     const info = () => {
+        const { name,dept,year } = values
         return(
             <Card 
                     title="Faculty Information"
