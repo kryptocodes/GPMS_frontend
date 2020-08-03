@@ -1,24 +1,18 @@
-import React,{useState} from 'react'
+import React from 'react'
 import Base from '../Home/base'
 import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/'
 import { UpdatePass } from './update'
 import { useForm } from "react-hook-form"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const UpdatePassword = () => {
 
-    const { register,handleSubmit,errors } = useForm()
-    
-    const [pass, setPass] = useState({
-        password:"",
-        cur:""
-    })
+    const { register,watch,handleSubmit,reset,errors } = useForm()
 
-    const [error, setError] = useState(false)
-    const [success, setSuccess] = useState(false)
-
-    const { password, cur } = pass
+    const WatchAllFields = watch()
 
     const {user, token} = isAuthenticated()
 
@@ -36,81 +30,62 @@ const UpdatePassword = () => {
         )
     }
 
-    const handleChange = name => event => {
-        setError(false)
-        setPass({...pass,[name]:event.target.value});
-      }
+    const Check = () => (
+        WatchAllFields.password !== WatchAllFields.cur ? true : false
+    ) 
 
-    const onSubmit = () => {
-        setError("")
-        setSuccess(false)
+    const onSubmit = (values) => {
+        (Check() ? toast.error("Check Your Password") :
         //backend request
-        UpdatePass(user._id,token,{password})
+        UpdatePass(user._id,token,values)
         .then(data => {
             if(data.error){
-                setError(data.error)
+                toast.error(data.error)
             } else {
-                setError("")
-                setSuccess(true)
-                setPass({
-                    ...pass,
-                    password:"",
-                    cur:""
-                })
+                toast.success("Password updated successfully")
+                reset({values})
             }
-        })
+        }))
     }
 
-    const successMessage = () => {
-        if(success) {
-            return <h4 className="alert alert-success text-center">Password updated successfully</h4>
-        }
-    }
-
-    const errorMessage = () => {
-        return ( 
-          <div className="justify-content-center alert alert-danger text-center" 
-                style={{display: error ? "" : "none"}}>
-          {error}
-          </div>
-        )
-    }
-
-    const warningMessage = () => {
-        return(
-            <p className="text-danger">Required</p>
-        )
-    }
+    const warningMessage = () => (
+        <div className="invalid-feedback d-block">This field is required</div>
+    )
 
     const updateForm = () => {
         return(
-            <form className="card shadow rounded-lg">
+            <React.Fragment>
+            <form className="card shadow rounded-lg" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group p-4">
             <p className="lead">Enter new password</p>
             <input type="password"
-                className="form-control my-3"
-                onChange={handleChange("password")}
-                value={password}
-                required
+                className={errors.password ? "form-control is-invalid" : "form-control my-3"}
                 name="password"
                 placeholder="Password"
-                ref={register({required:true,min:8})}
+                ref={register({required:true,
+                                minLength:{
+                                        value: 8,
+                                        message:"Password should be atleast 8 char long."
+                                }})}
                 />
                  {errors.password && warningMessage()}
             <p className="lead">Confirm your password</p>
             <input type="password"
-                className="form-control my-3"
-                onChange={handleChange("cur")}
-                value={cur}
-                required
+                 className={errors.cur ? "form-control is-invalid" : "form-control my-3"}
                 name="cur"
                 placeholder="password"
-                ref={register({required:true,min:8})}
+                ref={register({required:true,
+                                minLength:{
+                                    value: 8,
+                                    message:"Password should be atleast 8 char long."
+                                }})}
                 />
                  {errors.cur && warningMessage()}
-            <button onClick={handleSubmit(onSubmit)} className="btn btn-block btn-outline-success">Update password</button>
+            <button type="submit" 
+                    className="btn btn-block p-2 btn-outline-success">Update Password</button>
             </div>
             </form>
+            </React.Fragment>
         )
     }
 
@@ -118,11 +93,10 @@ const UpdatePassword = () => {
         <Base 
             title="Update Password"
             className="container">
+        <ToastContainer position="top-center"/>
         {goBack()}
-        <div className="row bg-white rounded">
-        <div className="col-md-8 offset-md-2">
-            {successMessage()}
-            {errorMessage()}
+        <div className="row mt-4 bg-white rounded">
+        <div className="col-md-7 mx-auto">
             {updateForm()}
         </div>
         </div>

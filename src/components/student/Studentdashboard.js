@@ -36,7 +36,7 @@ const StudentBoard = () => {
 
     const student = () => {
         return (
-            <Card className="shadow rounded h-100">
+            <Card className="shadow rounded h-100 text-center">
                 <h4 className="card-header bg-dark text-white">Student</h4>
                 <ul className="list-group">
                     <Card hoverable>
@@ -83,10 +83,10 @@ const StudentBoard = () => {
             <React.Fragment>
             {loading ? LoadingScreen() : (
             <div className="row mx-auto">
-                <div className="col-md-4 p-2 mx-auto">
+                <div className="col-md-4 p-2 mx-auto w-100">
                 {student()}
                 </div>
-                <div className="col-md-7 p-2 mx-auto">
+                <div className="col-md-6 p-2 mx-auto">
                 {info()}
                 </div>
             </div>)}
